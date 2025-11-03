@@ -1,0 +1,1763 @@
+[03-Nov-2025 19:01:59 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:01:59 Europe/Berlin] tipoMovId: 1
+[03-Nov-2025 19:01:59 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:01:59 Europe/Berlin] anio: null
+[03-Nov-2025 19:01:59 Europe/Berlin] mes: null
+[03-Nov-2025 19:01:59 Europe/Berlin] limit: 10
+[03-Nov-2025 19:01:59 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:01:59 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":1,":limit":10}
+[03-Nov-2025 19:01:59 Europe/Berlin] Rows encontradas: 4
+[03-Nov-2025 19:01:59 Europe/Berlin] Primera fila: {"id":5,"user_id":2,"concepto_id":1,"valor":"8693800.00","fecha":"2025-11-01","detalle":"","notas":null,"created_at":"2025-11-03 09:54:22","concepto_nombre":"Ahorro","concepto_icono":"\ud83c\udfe6","tipo_mov_id":1,"tipo_movimiento":"Ingreso","usuario_nombre":"Diego"}
+[03-Nov-2025 19:01:59 Europe/Berlin] ============================
+[03-Nov-2025 19:02:08 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:02:08 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 19:02:08 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:02:08 Europe/Berlin] anio: null
+[03-Nov-2025 19:02:08 Europe/Berlin] mes: null
+[03-Nov-2025 19:02:08 Europe/Berlin] limit: 10
+[03-Nov-2025 19:02:08 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:02:08 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 19:02:09 Europe/Berlin] Rows encontradas: 0
+[03-Nov-2025 19:02:09 Europe/Berlin] ============================
+[03-Nov-2025 19:02:36 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:02:36 Europe/Berlin] tipoMovId: 1
+[03-Nov-2025 19:02:36 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:02:36 Europe/Berlin] anio: null
+[03-Nov-2025 19:02:36 Europe/Berlin] mes: null
+[03-Nov-2025 19:02:36 Europe/Berlin] limit: 10
+[03-Nov-2025 19:02:36 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:02:36 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":1,":limit":10}
+[03-Nov-2025 19:02:36 Europe/Berlin] Rows encontradas: 4
+[03-Nov-2025 19:02:36 Europe/Berlin] Primera fila: {"id":5,"user_id":2,"concepto_id":1,"valor":"8693800.00","fecha":"2025-11-01","detalle":"","notas":null,"created_at":"2025-11-03 09:54:22","concepto_nombre":"Ahorro","concepto_icono":"\ud83c\udfe6","tipo_mov_id":1,"tipo_movimiento":"Ingreso","usuario_nombre":"Diego"}
+[03-Nov-2025 19:02:36 Europe/Berlin] ============================
+[03-Nov-2025 19:02:49 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:02:49 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 19:02:49 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:02:49 Europe/Berlin] anio: null
+[03-Nov-2025 19:02:49 Europe/Berlin] mes: null
+[03-Nov-2025 19:02:49 Europe/Berlin] limit: 10
+[03-Nov-2025 19:02:49 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:02:49 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 19:02:50 Europe/Berlin] Rows encontradas: 0
+[03-Nov-2025 19:02:50 Europe/Berlin] ============================
+[03-Nov-2025 19:03:06 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:03:06 Europe/Berlin] tipoMovId: 1
+[03-Nov-2025 19:03:06 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:03:06 Europe/Berlin] anio: null
+[03-Nov-2025 19:03:06 Europe/Berlin] mes: null
+[03-Nov-2025 19:03:06 Europe/Berlin] limit: 10
+[03-Nov-2025 19:03:06 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:03:06 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":1,":limit":10}
+[03-Nov-2025 19:03:07 Europe/Berlin] Rows encontradas: 4
+[03-Nov-2025 19:03:07 Europe/Berlin] Primera fila: {"id":5,"user_id":2,"concepto_id":1,"valor":"8693800.00","fecha":"2025-11-01","detalle":"","notas":null,"created_at":"2025-11-03 09:54:22","concepto_nombre":"Ahorro","concepto_icono":"\ud83c\udfe6","tipo_mov_id":1,"tipo_movimiento":"Ingreso","usuario_nombre":"Diego"}
+[03-Nov-2025 19:03:07 Europe/Berlin] ============================
+[03-Nov-2025 19:03:11 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:03:11 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 19:03:11 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:03:11 Europe/Berlin] anio: null
+[03-Nov-2025 19:03:11 Europe/Berlin] mes: null
+[03-Nov-2025 19:03:11 Europe/Berlin] limit: 10
+[03-Nov-2025 19:03:11 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:03:11 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 19:03:11 Europe/Berlin] Rows encontradas: 0
+[03-Nov-2025 19:03:11 Europe/Berlin] ============================
+[03-Nov-2025 19:04:51 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:04:51 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 19:04:51 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:04:51 Europe/Berlin] anio: null
+[03-Nov-2025 19:04:51 Europe/Berlin] mes: null
+[03-Nov-2025 19:04:51 Europe/Berlin] limit: 10
+[03-Nov-2025 19:04:51 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:04:51 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 19:04:52 Europe/Berlin] Rows encontradas: 1
+[03-Nov-2025 19:04:52 Europe/Berlin] Primera fila: {"id":6,"user_id":1,"concepto_id":10,"valor":"43000.00","fecha":"2025-11-03","detalle":"","notas":null,"created_at":"2025-11-03 11:04:49","concepto_nombre":"Restaurantes","concepto_icono":"\ud83c\udf7d\ufe0f","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 19:04:52 Europe/Berlin] ============================
+[03-Nov-2025 19:05:09 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:05:09 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 19:05:09 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:05:09 Europe/Berlin] anio: null
+[03-Nov-2025 19:05:09 Europe/Berlin] mes: null
+[03-Nov-2025 19:05:09 Europe/Berlin] limit: 10
+[03-Nov-2025 19:05:09 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:05:09 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 19:05:10 Europe/Berlin] Rows encontradas: 2
+[03-Nov-2025 19:05:10 Europe/Berlin] Primera fila: {"id":7,"user_id":1,"concepto_id":10,"valor":"12000.00","fecha":"2025-11-03","detalle":null,"notas":null,"created_at":"2025-11-03 11:05:07","concepto_nombre":"Restaurantes","concepto_icono":"\ud83c\udf7d\ufe0f","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 19:05:10 Europe/Berlin] ============================
+[03-Nov-2025 19:05:32 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:05:32 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 19:05:32 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:05:32 Europe/Berlin] anio: null
+[03-Nov-2025 19:05:32 Europe/Berlin] mes: null
+[03-Nov-2025 19:05:32 Europe/Berlin] limit: 10
+[03-Nov-2025 19:05:32 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:05:32 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 19:05:33 Europe/Berlin] Rows encontradas: 1
+[03-Nov-2025 19:05:33 Europe/Berlin] Primera fila: {"id":6,"user_id":1,"concepto_id":10,"valor":"43000.00","fecha":"2025-11-03","detalle":"","notas":null,"created_at":"2025-11-03 11:04:49","concepto_nombre":"Restaurantes","concepto_icono":"\ud83c\udf7d\ufe0f","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 19:05:33 Europe/Berlin] ============================
+[03-Nov-2025 19:05:38 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:05:38 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 19:05:38 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:05:38 Europe/Berlin] anio: null
+[03-Nov-2025 19:05:38 Europe/Berlin] mes: null
+[03-Nov-2025 19:05:38 Europe/Berlin] limit: 10
+[03-Nov-2025 19:05:38 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:05:38 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 19:05:39 Europe/Berlin] Rows encontradas: 0
+[03-Nov-2025 19:05:39 Europe/Berlin] ============================
+[03-Nov-2025 19:06:22 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:06:22 Europe/Berlin] tipoMovId: 1
+[03-Nov-2025 19:06:22 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:06:22 Europe/Berlin] anio: null
+[03-Nov-2025 19:06:22 Europe/Berlin] mes: null
+[03-Nov-2025 19:06:22 Europe/Berlin] limit: 10
+[03-Nov-2025 19:06:22 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:06:22 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":1,":limit":10}
+[03-Nov-2025 19:06:22 Europe/Berlin] Rows encontradas: 4
+[03-Nov-2025 19:06:22 Europe/Berlin] Primera fila: {"id":5,"user_id":2,"concepto_id":1,"valor":"8693800.00","fecha":"2025-11-01","detalle":"","notas":null,"created_at":"2025-11-03 09:54:22","concepto_nombre":"Ahorro","concepto_icono":"\ud83c\udfe6","tipo_mov_id":1,"tipo_movimiento":"Ingreso","usuario_nombre":"Diego"}
+[03-Nov-2025 19:06:22 Europe/Berlin] ============================
+[03-Nov-2025 19:06:39 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:06:39 Europe/Berlin] tipoMovId: 1
+[03-Nov-2025 19:06:39 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:06:39 Europe/Berlin] anio: null
+[03-Nov-2025 19:06:39 Europe/Berlin] mes: null
+[03-Nov-2025 19:06:39 Europe/Berlin] limit: 10
+[03-Nov-2025 19:06:39 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:06:39 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":1,":limit":10}
+[03-Nov-2025 19:06:40 Europe/Berlin] Rows encontradas: 5
+[03-Nov-2025 19:06:40 Europe/Berlin] Primera fila: {"id":8,"user_id":1,"concepto_id":1,"valor":"19520.00","fecha":"2025-11-03","detalle":"","notas":null,"created_at":"2025-11-03 11:06:37","concepto_nombre":"Ahorro","concepto_icono":"\ud83c\udfe6","tipo_mov_id":1,"tipo_movimiento":"Ingreso","usuario_nombre":"Pilar"}
+[03-Nov-2025 19:06:40 Europe/Berlin] ============================
+[03-Nov-2025 19:06:49 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:06:49 Europe/Berlin] tipoMovId: 1
+[03-Nov-2025 19:06:49 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:06:49 Europe/Berlin] anio: null
+[03-Nov-2025 19:06:49 Europe/Berlin] mes: null
+[03-Nov-2025 19:06:49 Europe/Berlin] limit: 10
+[03-Nov-2025 19:06:49 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:06:49 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":1,":limit":10}
+[03-Nov-2025 19:06:49 Europe/Berlin] Rows encontradas: 6
+[03-Nov-2025 19:06:49 Europe/Berlin] Primera fila: {"id":9,"user_id":1,"concepto_id":1,"valor":"199731.00","fecha":"2025-11-03","detalle":null,"notas":null,"created_at":"2025-11-03 11:06:47","concepto_nombre":"Ahorro","concepto_icono":"\ud83c\udfe6","tipo_mov_id":1,"tipo_movimiento":"Ingreso","usuario_nombre":"Pilar"}
+[03-Nov-2025 19:06:49 Europe/Berlin] ============================
+[03-Nov-2025 19:25:10 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:25:10 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 19:25:10 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:25:10 Europe/Berlin] anio: null
+[03-Nov-2025 19:25:10 Europe/Berlin] mes: null
+[03-Nov-2025 19:25:10 Europe/Berlin] limit: 10
+[03-Nov-2025 19:25:10 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:25:10 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 19:25:11 Europe/Berlin] Rows encontradas: 0
+[03-Nov-2025 19:25:11 Europe/Berlin] ============================
+[03-Nov-2025 19:26:17 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:26:17 Europe/Berlin] tipoMovId: 1
+[03-Nov-2025 19:26:17 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:26:17 Europe/Berlin] anio: null
+[03-Nov-2025 19:26:17 Europe/Berlin] mes: null
+[03-Nov-2025 19:26:17 Europe/Berlin] limit: 10
+[03-Nov-2025 19:26:17 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:26:17 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":1,":limit":10}
+[03-Nov-2025 19:26:17 Europe/Berlin] Rows encontradas: 4
+[03-Nov-2025 19:26:17 Europe/Berlin] Primera fila: {"id":5,"user_id":2,"concepto_id":1,"valor":"8693800.00","fecha":"2025-11-01","detalle":"","notas":null,"created_at":"2025-11-03 09:54:22","concepto_nombre":"Ahorro","concepto_icono":"\ud83c\udfe6","tipo_mov_id":1,"tipo_movimiento":"Ingreso","usuario_nombre":"Diego"}
+[03-Nov-2025 19:26:17 Europe/Berlin] ============================
+[03-Nov-2025 19:26:18 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:26:18 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 19:26:18 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:26:18 Europe/Berlin] anio: null
+[03-Nov-2025 19:26:18 Europe/Berlin] mes: null
+[03-Nov-2025 19:26:18 Europe/Berlin] limit: 10
+[03-Nov-2025 19:26:18 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:26:18 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 19:26:18 Europe/Berlin] Rows encontradas: 0
+[03-Nov-2025 19:26:18 Europe/Berlin] ============================
+[03-Nov-2025 19:26:20 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:26:20 Europe/Berlin] tipoMovId: 1
+[03-Nov-2025 19:26:20 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:26:20 Europe/Berlin] anio: null
+[03-Nov-2025 19:26:20 Europe/Berlin] mes: null
+[03-Nov-2025 19:26:20 Europe/Berlin] limit: 10
+[03-Nov-2025 19:26:20 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:26:20 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":1,":limit":10}
+[03-Nov-2025 19:26:20 Europe/Berlin] Rows encontradas: 4
+[03-Nov-2025 19:26:20 Europe/Berlin] Primera fila: {"id":5,"user_id":2,"concepto_id":1,"valor":"8693800.00","fecha":"2025-11-01","detalle":"","notas":null,"created_at":"2025-11-03 09:54:22","concepto_nombre":"Ahorro","concepto_icono":"\ud83c\udfe6","tipo_mov_id":1,"tipo_movimiento":"Ingreso","usuario_nombre":"Diego"}
+[03-Nov-2025 19:26:20 Europe/Berlin] ============================
+[03-Nov-2025 19:48:07 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:48:07 Europe/Berlin] tipoMovId: 1
+[03-Nov-2025 19:48:07 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:48:07 Europe/Berlin] anio: null
+[03-Nov-2025 19:48:07 Europe/Berlin] mes: null
+[03-Nov-2025 19:48:07 Europe/Berlin] limit: 10
+[03-Nov-2025 19:48:07 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:48:07 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":1,":limit":10}
+[03-Nov-2025 19:48:08 Europe/Berlin] Rows encontradas: 4
+[03-Nov-2025 19:48:08 Europe/Berlin] Primera fila: {"id":5,"user_id":2,"concepto_id":1,"valor":"8693800.00","fecha":"2025-11-01","detalle":"","notas":null,"created_at":"2025-11-03 09:54:22","concepto_nombre":"Ahorro","concepto_icono":"\ud83c\udfe6","tipo_mov_id":1,"tipo_movimiento":"Ingreso","usuario_nombre":"Diego"}
+[03-Nov-2025 19:48:08 Europe/Berlin] ============================
+[03-Nov-2025 19:48:14 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:48:14 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 19:48:14 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:48:14 Europe/Berlin] anio: null
+[03-Nov-2025 19:48:14 Europe/Berlin] mes: null
+[03-Nov-2025 19:48:14 Europe/Berlin] limit: 10
+[03-Nov-2025 19:48:14 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:48:14 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 19:48:14 Europe/Berlin] Rows encontradas: 0
+[03-Nov-2025 19:48:14 Europe/Berlin] ============================
+[03-Nov-2025 19:49:20 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:49:20 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 19:49:20 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:49:20 Europe/Berlin] anio: null
+[03-Nov-2025 19:49:20 Europe/Berlin] mes: null
+[03-Nov-2025 19:49:20 Europe/Berlin] limit: 10
+[03-Nov-2025 19:49:20 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:49:20 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 19:49:20 Europe/Berlin] Rows encontradas: 1
+[03-Nov-2025 19:49:20 Europe/Berlin] Primera fila: {"id":6,"user_id":1,"concepto_id":17,"valor":"27800.00","fecha":"2025-11-01","detalle":"Miniso accesorios personales pilar","notas":null,"created_at":"2025-11-03 11:49:18","concepto_nombre":"Gastos Extra","concepto_icono":"\u2795","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 19:49:20 Europe/Berlin] ============================
+[03-Nov-2025 19:49:44 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:49:44 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 19:49:44 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:49:44 Europe/Berlin] anio: null
+[03-Nov-2025 19:49:44 Europe/Berlin] mes: null
+[03-Nov-2025 19:49:44 Europe/Berlin] limit: 10
+[03-Nov-2025 19:49:44 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:49:44 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 19:49:45 Europe/Berlin] Rows encontradas: 2
+[03-Nov-2025 19:49:45 Europe/Berlin] Primera fila: {"id":7,"user_id":1,"concepto_id":10,"valor":"43000.00","fecha":"2025-11-01","detalle":null,"notas":null,"created_at":"2025-11-03 11:49:42","concepto_nombre":"Restaurantes","concepto_icono":"\ud83c\udf7d\ufe0f","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 19:49:45 Europe/Berlin] ============================
+[03-Nov-2025 19:50:40 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:50:40 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 19:50:40 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:50:40 Europe/Berlin] anio: null
+[03-Nov-2025 19:50:40 Europe/Berlin] mes: null
+[03-Nov-2025 19:50:40 Europe/Berlin] limit: 10
+[03-Nov-2025 19:50:40 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:50:40 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 19:50:41 Europe/Berlin] Rows encontradas: 2
+[03-Nov-2025 19:50:41 Europe/Berlin] Primera fila: {"id":7,"user_id":1,"concepto_id":10,"valor":"43000.00","fecha":"2025-11-01","detalle":null,"notas":null,"created_at":"2025-11-03 11:49:42","concepto_nombre":"Restaurantes","concepto_icono":"\ud83c\udf7d\ufe0f","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 19:50:41 Europe/Berlin] ============================
+[03-Nov-2025 19:50:42 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:50:42 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 19:50:42 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:50:42 Europe/Berlin] anio: null
+[03-Nov-2025 19:50:42 Europe/Berlin] mes: null
+[03-Nov-2025 19:50:42 Europe/Berlin] limit: 10
+[03-Nov-2025 19:50:42 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:50:42 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 19:50:42 Europe/Berlin] Rows encontradas: 2
+[03-Nov-2025 19:50:42 Europe/Berlin] Primera fila: {"id":7,"user_id":1,"concepto_id":10,"valor":"43000.00","fecha":"2025-11-01","detalle":null,"notas":null,"created_at":"2025-11-03 11:49:42","concepto_nombre":"Restaurantes","concepto_icono":"\ud83c\udf7d\ufe0f","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 19:50:42 Europe/Berlin] ============================
+[03-Nov-2025 19:50:54 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:50:54 Europe/Berlin] tipoMovId: 1
+[03-Nov-2025 19:50:54 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:50:54 Europe/Berlin] anio: null
+[03-Nov-2025 19:50:54 Europe/Berlin] mes: null
+[03-Nov-2025 19:50:54 Europe/Berlin] limit: 10
+[03-Nov-2025 19:50:54 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:50:54 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":1,":limit":10}
+[03-Nov-2025 19:50:54 Europe/Berlin] Rows encontradas: 4
+[03-Nov-2025 19:50:54 Europe/Berlin] Primera fila: {"id":5,"user_id":2,"concepto_id":1,"valor":"8693800.00","fecha":"2025-11-01","detalle":"","notas":null,"created_at":"2025-11-03 09:54:22","concepto_nombre":"Ahorro","concepto_icono":"\ud83c\udfe6","tipo_mov_id":1,"tipo_movimiento":"Ingreso","usuario_nombre":"Diego"}
+[03-Nov-2025 19:50:54 Europe/Berlin] ============================
+[03-Nov-2025 19:50:56 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:50:56 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 19:50:56 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:50:56 Europe/Berlin] anio: null
+[03-Nov-2025 19:50:56 Europe/Berlin] mes: null
+[03-Nov-2025 19:50:56 Europe/Berlin] limit: 10
+[03-Nov-2025 19:50:56 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:50:56 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 19:50:57 Europe/Berlin] Rows encontradas: 2
+[03-Nov-2025 19:50:57 Europe/Berlin] Primera fila: {"id":7,"user_id":1,"concepto_id":10,"valor":"43000.00","fecha":"2025-11-01","detalle":null,"notas":null,"created_at":"2025-11-03 11:49:42","concepto_nombre":"Restaurantes","concepto_icono":"\ud83c\udf7d\ufe0f","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 19:50:57 Europe/Berlin] ============================
+[03-Nov-2025 19:51:15 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:51:15 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 19:51:15 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:51:15 Europe/Berlin] anio: null
+[03-Nov-2025 19:51:15 Europe/Berlin] mes: null
+[03-Nov-2025 19:51:15 Europe/Berlin] limit: 10
+[03-Nov-2025 19:51:15 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:51:15 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 19:51:15 Europe/Berlin] Rows encontradas: 3
+[03-Nov-2025 19:51:15 Europe/Berlin] Primera fila: {"id":8,"user_id":1,"concepto_id":10,"valor":"12000.00","fecha":"2025-11-01","detalle":"Postres","notas":null,"created_at":"2025-11-03 11:51:13","concepto_nombre":"Restaurantes","concepto_icono":"\ud83c\udf7d\ufe0f","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 19:51:15 Europe/Berlin] ============================
+[03-Nov-2025 19:58:14 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:58:14 Europe/Berlin] tipoMovId: 1
+[03-Nov-2025 19:58:14 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:58:14 Europe/Berlin] anio: null
+[03-Nov-2025 19:58:14 Europe/Berlin] mes: null
+[03-Nov-2025 19:58:14 Europe/Berlin] limit: 10
+[03-Nov-2025 19:58:14 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:58:14 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":1,":limit":10}
+[03-Nov-2025 19:58:14 Europe/Berlin] Rows encontradas: 4
+[03-Nov-2025 19:58:14 Europe/Berlin] Primera fila: {"id":5,"user_id":2,"concepto_id":1,"valor":"8693800.00","fecha":"2025-11-01","detalle":"","notas":null,"created_at":"2025-11-03 09:54:22","concepto_nombre":"Ahorro","concepto_icono":"\ud83c\udfe6","tipo_mov_id":1,"tipo_movimiento":"Ingreso","usuario_nombre":"Diego"}
+[03-Nov-2025 19:58:14 Europe/Berlin] ============================
+[03-Nov-2025 19:58:29 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:58:29 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 19:58:29 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:58:29 Europe/Berlin] anio: null
+[03-Nov-2025 19:58:29 Europe/Berlin] mes: null
+[03-Nov-2025 19:58:29 Europe/Berlin] limit: 10
+[03-Nov-2025 19:58:29 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:58:29 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 19:58:30 Europe/Berlin] Rows encontradas: 3
+[03-Nov-2025 19:58:30 Europe/Berlin] Primera fila: {"id":8,"user_id":1,"concepto_id":10,"valor":"12000.00","fecha":"2025-11-01","detalle":"Postres","notas":null,"created_at":"2025-11-03 11:51:13","concepto_nombre":"Restaurantes","concepto_icono":"\ud83c\udf7d\ufe0f","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 19:58:30 Europe/Berlin] ============================
+[03-Nov-2025 19:58:49 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:58:49 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 19:58:49 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:58:49 Europe/Berlin] anio: null
+[03-Nov-2025 19:58:49 Europe/Berlin] mes: null
+[03-Nov-2025 19:58:49 Europe/Berlin] limit: 10
+[03-Nov-2025 19:58:49 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:58:49 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 19:58:50 Europe/Berlin] Rows encontradas: 4
+[03-Nov-2025 19:58:50 Europe/Berlin] Primera fila: {"id":9,"user_id":1,"concepto_id":27,"valor":"29900.00","fecha":"2025-11-01","detalle":"","notas":null,"created_at":"2025-11-03 11:58:47","concepto_nombre":"Celular","concepto_icono":"\ud83d\udcf1","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 19:58:50 Europe/Berlin] ============================
+[03-Nov-2025 19:59:03 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:59:03 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 19:59:03 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:59:03 Europe/Berlin] anio: null
+[03-Nov-2025 19:59:03 Europe/Berlin] mes: null
+[03-Nov-2025 19:59:03 Europe/Berlin] limit: 10
+[03-Nov-2025 19:59:03 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:59:03 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 19:59:04 Europe/Berlin] Rows encontradas: 5
+[03-Nov-2025 19:59:04 Europe/Berlin] Primera fila: {"id":10,"user_id":1,"concepto_id":15,"valor":"7300.00","fecha":"2025-11-01","detalle":null,"notas":null,"created_at":"2025-11-03 11:59:01","concepto_nombre":"Parqueadero","concepto_icono":"\ud83c\udd7f\ufe0f","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 19:59:04 Europe/Berlin] ============================
+[03-Nov-2025 19:59:22 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:59:22 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 19:59:22 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:59:22 Europe/Berlin] anio: null
+[03-Nov-2025 19:59:22 Europe/Berlin] mes: null
+[03-Nov-2025 19:59:22 Europe/Berlin] limit: 10
+[03-Nov-2025 19:59:22 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:59:22 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 19:59:22 Europe/Berlin] Rows encontradas: 6
+[03-Nov-2025 19:59:22 Europe/Berlin] Primera fila: {"id":11,"user_id":1,"concepto_id":13,"valor":"48000.00","fecha":"2025-11-01","detalle":null,"notas":null,"created_at":"2025-11-03 11:59:20","concepto_nombre":"Mercado","concepto_icono":"\ud83d\uded2","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 19:59:22 Europe/Berlin] ============================
+[03-Nov-2025 19:59:38 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:59:38 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 19:59:38 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:59:38 Europe/Berlin] anio: null
+[03-Nov-2025 19:59:38 Europe/Berlin] mes: null
+[03-Nov-2025 19:59:38 Europe/Berlin] limit: 10
+[03-Nov-2025 19:59:38 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:59:38 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 19:59:38 Europe/Berlin] Rows encontradas: 7
+[03-Nov-2025 19:59:38 Europe/Berlin] Primera fila: {"id":12,"user_id":1,"concepto_id":13,"valor":"21200.00","fecha":"2025-11-01","detalle":null,"notas":null,"created_at":"2025-11-03 11:59:36","concepto_nombre":"Mercado","concepto_icono":"\ud83d\uded2","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 19:59:38 Europe/Berlin] ============================
+[03-Nov-2025 19:59:52 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 19:59:52 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 19:59:52 Europe/Berlin] circuloId: 1
+[03-Nov-2025 19:59:52 Europe/Berlin] anio: null
+[03-Nov-2025 19:59:52 Europe/Berlin] mes: null
+[03-Nov-2025 19:59:52 Europe/Berlin] limit: 10
+[03-Nov-2025 19:59:52 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 19:59:52 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 19:59:52 Europe/Berlin] Rows encontradas: 8
+[03-Nov-2025 19:59:52 Europe/Berlin] Primera fila: {"id":13,"user_id":1,"concepto_id":13,"valor":"11000.00","fecha":"2025-11-01","detalle":null,"notas":null,"created_at":"2025-11-03 11:59:50","concepto_nombre":"Mercado","concepto_icono":"\ud83d\uded2","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 19:59:52 Europe/Berlin] ============================
+[03-Nov-2025 20:00:20 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 20:00:20 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 20:00:20 Europe/Berlin] circuloId: 1
+[03-Nov-2025 20:00:20 Europe/Berlin] anio: null
+[03-Nov-2025 20:00:20 Europe/Berlin] mes: null
+[03-Nov-2025 20:00:20 Europe/Berlin] limit: 10
+[03-Nov-2025 20:00:20 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 20:00:20 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 20:00:20 Europe/Berlin] Rows encontradas: 9
+[03-Nov-2025 20:00:20 Europe/Berlin] Primera fila: {"id":14,"user_id":1,"concepto_id":10,"valor":"14000.00","fecha":"2025-11-02","detalle":"postre","notas":null,"created_at":"2025-11-03 12:00:17","concepto_nombre":"Restaurantes","concepto_icono":"\ud83c\udf7d\ufe0f","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 20:00:20 Europe/Berlin] ============================
+[03-Nov-2025 20:01:29 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 20:01:29 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 20:01:29 Europe/Berlin] circuloId: 1
+[03-Nov-2025 20:01:29 Europe/Berlin] anio: null
+[03-Nov-2025 20:01:29 Europe/Berlin] mes: null
+[03-Nov-2025 20:01:29 Europe/Berlin] limit: 10
+[03-Nov-2025 20:01:29 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 20:01:29 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 20:01:29 Europe/Berlin] Rows encontradas: 10
+[03-Nov-2025 20:01:29 Europe/Berlin] Primera fila: {"id":15,"user_id":1,"concepto_id":22,"valor":"1500000.00","fecha":"2025-11-02","detalle":"Sala papas","notas":null,"created_at":"2025-11-03 12:01:27","concepto_nombre":"Gastos Extra","concepto_icono":"\u2795","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 20:01:29 Europe/Berlin] ============================
+[03-Nov-2025 20:08:22 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 20:08:22 Europe/Berlin] tipoMovId: 1
+[03-Nov-2025 20:08:22 Europe/Berlin] circuloId: 1
+[03-Nov-2025 20:08:22 Europe/Berlin] anio: null
+[03-Nov-2025 20:08:22 Europe/Berlin] mes: null
+[03-Nov-2025 20:08:22 Europe/Berlin] limit: 10
+[03-Nov-2025 20:08:22 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 20:08:22 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":1,":limit":10}
+[03-Nov-2025 20:08:22 Europe/Berlin] Rows encontradas: 4
+[03-Nov-2025 20:08:22 Europe/Berlin] Primera fila: {"id":5,"user_id":2,"concepto_id":1,"valor":"8693800.00","fecha":"2025-11-01","detalle":"","notas":null,"created_at":"2025-11-03 09:54:22","concepto_nombre":"Ahorro","concepto_icono":"\ud83c\udfe6","tipo_mov_id":1,"tipo_movimiento":"Ingreso","usuario_nombre":"Diego"}
+[03-Nov-2025 20:08:22 Europe/Berlin] ============================
+[03-Nov-2025 20:08:31 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 20:08:31 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 20:08:31 Europe/Berlin] circuloId: 1
+[03-Nov-2025 20:08:31 Europe/Berlin] anio: null
+[03-Nov-2025 20:08:31 Europe/Berlin] mes: null
+[03-Nov-2025 20:08:31 Europe/Berlin] limit: 10
+[03-Nov-2025 20:08:31 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 20:08:31 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 20:08:32 Europe/Berlin] Rows encontradas: 10
+[03-Nov-2025 20:08:32 Europe/Berlin] Primera fila: {"id":15,"user_id":1,"concepto_id":22,"valor":"1500000.00","fecha":"2025-11-02","detalle":"Sala papas","notas":null,"created_at":"2025-11-03 12:01:27","concepto_nombre":"Gastos Extra","concepto_icono":"\u2795","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 20:08:32 Europe/Berlin] ============================
+[03-Nov-2025 20:09:26 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 20:09:26 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 20:09:26 Europe/Berlin] circuloId: 1
+[03-Nov-2025 20:09:26 Europe/Berlin] anio: null
+[03-Nov-2025 20:09:26 Europe/Berlin] mes: null
+[03-Nov-2025 20:09:26 Europe/Berlin] limit: 10
+[03-Nov-2025 20:09:26 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 20:09:26 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 20:09:26 Europe/Berlin] Rows encontradas: 10
+[03-Nov-2025 20:09:26 Europe/Berlin] Primera fila: {"id":15,"user_id":1,"concepto_id":22,"valor":"1500000.00","fecha":"2025-11-02","detalle":"Sala papas","notas":null,"created_at":"2025-11-03 12:01:27","concepto_nombre":"Gastos Extra","concepto_icono":"\u2795","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 20:09:26 Europe/Berlin] ============================
+[03-Nov-2025 20:09:51 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 20:09:51 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 20:09:51 Europe/Berlin] circuloId: 1
+[03-Nov-2025 20:09:51 Europe/Berlin] anio: null
+[03-Nov-2025 20:09:51 Europe/Berlin] mes: null
+[03-Nov-2025 20:09:51 Europe/Berlin] limit: 10
+[03-Nov-2025 20:09:51 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 20:09:51 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 20:09:51 Europe/Berlin] Rows encontradas: 10
+[03-Nov-2025 20:09:51 Europe/Berlin] Primera fila: {"id":15,"user_id":1,"concepto_id":22,"valor":"1500000.00","fecha":"2025-11-02","detalle":"Sala papas","notas":null,"created_at":"2025-11-03 12:01:27","concepto_nombre":"Gastos Extra","concepto_icono":"\u2795","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 20:09:51 Europe/Berlin] ============================
+[03-Nov-2025 20:10:17 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 20:10:17 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 20:10:17 Europe/Berlin] circuloId: 1
+[03-Nov-2025 20:10:17 Europe/Berlin] anio: null
+[03-Nov-2025 20:10:17 Europe/Berlin] mes: null
+[03-Nov-2025 20:10:17 Europe/Berlin] limit: 10
+[03-Nov-2025 20:10:17 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 20:10:17 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 20:10:18 Europe/Berlin] Rows encontradas: 10
+[03-Nov-2025 20:10:18 Europe/Berlin] Primera fila: {"id":15,"user_id":1,"concepto_id":22,"valor":"1500000.00","fecha":"2025-11-02","detalle":"Sala papas","notas":null,"created_at":"2025-11-03 12:01:27","concepto_nombre":"Gastos Extra","concepto_icono":"\u2795","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 20:10:18 Europe/Berlin] ============================
+[03-Nov-2025 20:10:40 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 20:10:40 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 20:10:40 Europe/Berlin] circuloId: 1
+[03-Nov-2025 20:10:40 Europe/Berlin] anio: null
+[03-Nov-2025 20:10:40 Europe/Berlin] mes: null
+[03-Nov-2025 20:10:40 Europe/Berlin] limit: 10
+[03-Nov-2025 20:10:40 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 20:10:40 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 20:10:40 Europe/Berlin] Rows encontradas: 10
+[03-Nov-2025 20:10:40 Europe/Berlin] Primera fila: {"id":18,"user_id":1,"concepto_id":12,"valor":"50000.00","fecha":"2025-11-02","detalle":null,"notas":null,"created_at":"2025-11-03 12:10:38","concepto_nombre":"Gasolina","concepto_icono":"\u26fd","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 20:10:40 Europe/Berlin] ============================
+[03-Nov-2025 20:11:51 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 20:11:51 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 20:11:51 Europe/Berlin] circuloId: 1
+[03-Nov-2025 20:11:51 Europe/Berlin] anio: null
+[03-Nov-2025 20:11:51 Europe/Berlin] mes: null
+[03-Nov-2025 20:11:51 Europe/Berlin] limit: 10
+[03-Nov-2025 20:11:51 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 20:11:51 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 20:11:52 Europe/Berlin] Rows encontradas: 10
+[03-Nov-2025 20:11:52 Europe/Berlin] Primera fila: {"id":18,"user_id":1,"concepto_id":12,"valor":"50000.00","fecha":"2025-11-02","detalle":null,"notas":null,"created_at":"2025-11-03 12:10:38","concepto_nombre":"Gasolina","concepto_icono":"\u26fd","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 20:11:52 Europe/Berlin] ============================
+[03-Nov-2025 20:12:44 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 20:12:44 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 20:12:44 Europe/Berlin] circuloId: 1
+[03-Nov-2025 20:12:44 Europe/Berlin] anio: null
+[03-Nov-2025 20:12:44 Europe/Berlin] mes: null
+[03-Nov-2025 20:12:44 Europe/Berlin] limit: 10
+[03-Nov-2025 20:12:44 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 20:12:44 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 20:12:44 Europe/Berlin] Rows encontradas: 10
+[03-Nov-2025 20:12:44 Europe/Berlin] Primera fila: {"id":18,"user_id":1,"concepto_id":12,"valor":"50000.00","fecha":"2025-11-02","detalle":null,"notas":null,"created_at":"2025-11-03 12:10:38","concepto_nombre":"Gasolina","concepto_icono":"\u26fd","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 20:12:44 Europe/Berlin] ============================
+[03-Nov-2025 20:14:40 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 20:14:40 Europe/Berlin] tipoMovId: 1
+[03-Nov-2025 20:14:40 Europe/Berlin] circuloId: 1
+[03-Nov-2025 20:14:40 Europe/Berlin] anio: null
+[03-Nov-2025 20:14:40 Europe/Berlin] mes: null
+[03-Nov-2025 20:14:40 Europe/Berlin] limit: 10
+[03-Nov-2025 20:14:40 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 20:14:40 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":1,":limit":10}
+[03-Nov-2025 20:14:40 Europe/Berlin] Rows encontradas: 4
+[03-Nov-2025 20:14:40 Europe/Berlin] Primera fila: {"id":5,"user_id":2,"concepto_id":1,"valor":"8693800.00","fecha":"2025-11-01","detalle":"","notas":null,"created_at":"2025-11-03 09:54:22","concepto_nombre":"Ahorro","concepto_icono":"\ud83c\udfe6","tipo_mov_id":1,"tipo_movimiento":"Ingreso","usuario_nombre":"Diego"}
+[03-Nov-2025 20:14:40 Europe/Berlin] ============================
+[03-Nov-2025 20:14:41 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 20:14:41 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 20:14:41 Europe/Berlin] circuloId: 1
+[03-Nov-2025 20:14:41 Europe/Berlin] anio: null
+[03-Nov-2025 20:14:41 Europe/Berlin] mes: null
+[03-Nov-2025 20:14:41 Europe/Berlin] limit: 10
+[03-Nov-2025 20:14:41 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 20:14:41 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 20:14:42 Europe/Berlin] Rows encontradas: 10
+[03-Nov-2025 20:14:42 Europe/Berlin] Primera fila: {"id":18,"user_id":1,"concepto_id":12,"valor":"50000.00","fecha":"2025-11-02","detalle":null,"notas":null,"created_at":"2025-11-03 12:10:38","concepto_nombre":"Gasolina","concepto_icono":"\u26fd","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 20:14:42 Europe/Berlin] ============================
+[03-Nov-2025 20:14:57 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 20:14:57 Europe/Berlin] tipoMovId: 1
+[03-Nov-2025 20:14:57 Europe/Berlin] circuloId: 1
+[03-Nov-2025 20:14:57 Europe/Berlin] anio: null
+[03-Nov-2025 20:14:57 Europe/Berlin] mes: null
+[03-Nov-2025 20:14:57 Europe/Berlin] limit: 10
+[03-Nov-2025 20:14:57 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 20:14:57 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":1,":limit":10}
+[03-Nov-2025 20:14:58 Europe/Berlin] Rows encontradas: 4
+[03-Nov-2025 20:14:58 Europe/Berlin] Primera fila: {"id":5,"user_id":2,"concepto_id":1,"valor":"8693800.00","fecha":"2025-11-01","detalle":"","notas":null,"created_at":"2025-11-03 09:54:22","concepto_nombre":"Ahorro","concepto_icono":"\ud83c\udfe6","tipo_mov_id":1,"tipo_movimiento":"Ingreso","usuario_nombre":"Diego"}
+[03-Nov-2025 20:14:58 Europe/Berlin] ============================
+[03-Nov-2025 20:14:59 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 20:14:59 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 20:14:59 Europe/Berlin] circuloId: 1
+[03-Nov-2025 20:14:59 Europe/Berlin] anio: null
+[03-Nov-2025 20:14:59 Europe/Berlin] mes: null
+[03-Nov-2025 20:14:59 Europe/Berlin] limit: 10
+[03-Nov-2025 20:14:59 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 20:14:59 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 20:14:59 Europe/Berlin] Rows encontradas: 10
+[03-Nov-2025 20:14:59 Europe/Berlin] Primera fila: {"id":18,"user_id":1,"concepto_id":12,"valor":"50000.00","fecha":"2025-11-02","detalle":null,"notas":null,"created_at":"2025-11-03 12:10:38","concepto_nombre":"Gasolina","concepto_icono":"\u26fd","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 20:14:59 Europe/Berlin] ============================
+[03-Nov-2025 20:16:06 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 20:16:06 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 20:16:06 Europe/Berlin] circuloId: 1
+[03-Nov-2025 20:16:06 Europe/Berlin] anio: null
+[03-Nov-2025 20:16:06 Europe/Berlin] mes: null
+[03-Nov-2025 20:16:06 Europe/Berlin] limit: 10
+[03-Nov-2025 20:16:06 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 20:16:06 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 20:16:07 Europe/Berlin] Rows encontradas: 10
+[03-Nov-2025 20:16:07 Europe/Berlin] Primera fila: {"id":18,"user_id":1,"concepto_id":12,"valor":"50000.00","fecha":"2025-11-02","detalle":null,"notas":null,"created_at":"2025-11-03 12:10:38","concepto_nombre":"Gasolina","concepto_icono":"\u26fd","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 20:16:07 Europe/Berlin] ============================
+[03-Nov-2025 20:16:14 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 20:16:14 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 20:16:14 Europe/Berlin] circuloId: 1
+[03-Nov-2025 20:16:14 Europe/Berlin] anio: null
+[03-Nov-2025 20:16:14 Europe/Berlin] mes: null
+[03-Nov-2025 20:16:14 Europe/Berlin] limit: 10
+[03-Nov-2025 20:16:14 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 20:16:14 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 20:16:15 Europe/Berlin] Rows encontradas: 10
+[03-Nov-2025 20:16:15 Europe/Berlin] Primera fila: {"id":19,"user_id":1,"concepto_id":15,"valor":"1700.00","fecha":"2025-11-03","detalle":"","notas":null,"created_at":"2025-11-03 12:16:13","concepto_nombre":"Parqueadero","concepto_icono":"\ud83c\udd7f\ufe0f","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 20:16:15 Europe/Berlin] ============================
+[03-Nov-2025 20:16:39 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 20:16:39 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 20:16:39 Europe/Berlin] circuloId: 1
+[03-Nov-2025 20:16:39 Europe/Berlin] anio: null
+[03-Nov-2025 20:16:39 Europe/Berlin] mes: null
+[03-Nov-2025 20:16:39 Europe/Berlin] limit: 10
+[03-Nov-2025 20:16:39 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 20:16:39 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 20:16:40 Europe/Berlin] Rows encontradas: 10
+[03-Nov-2025 20:16:40 Europe/Berlin] Primera fila: {"id":20,"user_id":1,"concepto_id":17,"valor":"179900.00","fecha":"2025-11-03","detalle":"Almohada","notas":null,"created_at":"2025-11-03 12:16:37","concepto_nombre":"Gastos Extra","concepto_icono":"\u2795","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 20:16:40 Europe/Berlin] ============================
+[03-Nov-2025 20:17:01 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 20:17:01 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 20:17:01 Europe/Berlin] circuloId: 1
+[03-Nov-2025 20:17:01 Europe/Berlin] anio: null
+[03-Nov-2025 20:17:01 Europe/Berlin] mes: null
+[03-Nov-2025 20:17:01 Europe/Berlin] limit: 10
+[03-Nov-2025 20:17:01 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 20:17:01 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 20:17:01 Europe/Berlin] Rows encontradas: 10
+[03-Nov-2025 20:17:01 Europe/Berlin] Primera fila: {"id":21,"user_id":1,"concepto_id":17,"valor":"28000.00","fecha":"2025-11-03","detalle":"Utensilios casa","notas":null,"created_at":"2025-11-03 12:16:59","concepto_nombre":"Gastos Extra","concepto_icono":"\u2795","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 20:17:01 Europe/Berlin] ============================
+[03-Nov-2025 20:17:24 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 20:17:24 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 20:17:24 Europe/Berlin] circuloId: 1
+[03-Nov-2025 20:17:24 Europe/Berlin] anio: null
+[03-Nov-2025 20:17:24 Europe/Berlin] mes: null
+[03-Nov-2025 20:17:24 Europe/Berlin] limit: 10
+[03-Nov-2025 20:17:24 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 20:17:24 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 20:17:24 Europe/Berlin] Rows encontradas: 10
+[03-Nov-2025 20:17:24 Europe/Berlin] Primera fila: {"id":22,"user_id":1,"concepto_id":22,"valor":"112500.00","fecha":"2025-11-03","detalle":"112500","notas":null,"created_at":"2025-11-03 12:17:22","concepto_nombre":"Gastos Extra","concepto_icono":"\u2795","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 20:17:24 Europe/Berlin] ============================
+[03-Nov-2025 20:18:38 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 20:18:38 Europe/Berlin] tipoMovId: 1
+[03-Nov-2025 20:18:38 Europe/Berlin] circuloId: 1
+[03-Nov-2025 20:18:38 Europe/Berlin] anio: null
+[03-Nov-2025 20:18:38 Europe/Berlin] mes: null
+[03-Nov-2025 20:18:38 Europe/Berlin] limit: 10
+[03-Nov-2025 20:18:38 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 20:18:38 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":1,":limit":10}
+[03-Nov-2025 20:18:38 Europe/Berlin] Rows encontradas: 4
+[03-Nov-2025 20:18:38 Europe/Berlin] Primera fila: {"id":5,"user_id":2,"concepto_id":1,"valor":"8693800.00","fecha":"2025-11-01","detalle":"","notas":null,"created_at":"2025-11-03 09:54:22","concepto_nombre":"Ahorro","concepto_icono":"\ud83c\udfe6","tipo_mov_id":1,"tipo_movimiento":"Ingreso","usuario_nombre":"Diego"}
+[03-Nov-2025 20:18:38 Europe/Berlin] ============================
+[03-Nov-2025 20:23:20 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 20:23:20 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 20:23:20 Europe/Berlin] circuloId: 1
+[03-Nov-2025 20:23:20 Europe/Berlin] anio: null
+[03-Nov-2025 20:23:20 Europe/Berlin] mes: null
+[03-Nov-2025 20:23:20 Europe/Berlin] limit: 10
+[03-Nov-2025 20:23:20 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 20:23:20 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 20:23:20 Europe/Berlin] Rows encontradas: 10
+[03-Nov-2025 20:23:20 Europe/Berlin] Primera fila: {"id":22,"user_id":1,"concepto_id":22,"valor":"112500.00","fecha":"2025-11-03","detalle":"112500","notas":null,"created_at":"2025-11-03 12:17:22","concepto_nombre":"Gastos Extra","concepto_icono":"\u2795","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 20:23:20 Europe/Berlin] ============================
+[03-Nov-2025 20:55:18 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 20:55:18 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 20:55:18 Europe/Berlin] circuloId: 1
+[03-Nov-2025 20:55:18 Europe/Berlin] anio: null
+[03-Nov-2025 20:55:18 Europe/Berlin] mes: null
+[03-Nov-2025 20:55:18 Europe/Berlin] limit: 10
+[03-Nov-2025 20:55:18 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 20:55:18 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 20:55:18 Europe/Berlin] Rows encontradas: 10
+[03-Nov-2025 20:55:18 Europe/Berlin] Primera fila: {"id":22,"user_id":1,"concepto_id":22,"valor":"112500.00","fecha":"2025-11-03","detalle":"112500","notas":null,"created_at":"2025-11-03 12:17:22","concepto_nombre":"Gastos Extra","concepto_icono":"\u2795","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 20:55:18 Europe/Berlin] ============================
+[03-Nov-2025 20:55:34 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 20:55:34 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 20:55:34 Europe/Berlin] circuloId: 1
+[03-Nov-2025 20:55:34 Europe/Berlin] anio: null
+[03-Nov-2025 20:55:34 Europe/Berlin] mes: null
+[03-Nov-2025 20:55:34 Europe/Berlin] limit: 10
+[03-Nov-2025 20:55:34 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 20:55:34 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 20:55:35 Europe/Berlin] Rows encontradas: 10
+[03-Nov-2025 20:55:35 Europe/Berlin] Primera fila: {"id":22,"user_id":1,"concepto_id":22,"valor":"112500.00","fecha":"2025-11-03","detalle":"112500","notas":null,"created_at":"2025-11-03 12:17:22","concepto_nombre":"Gastos Extra","concepto_icono":"\u2795","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 20:55:35 Europe/Berlin] ============================
+[03-Nov-2025 20:55:47 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 20:55:47 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 20:55:47 Europe/Berlin] circuloId: 1
+[03-Nov-2025 20:55:47 Europe/Berlin] anio: null
+[03-Nov-2025 20:55:47 Europe/Berlin] mes: null
+[03-Nov-2025 20:55:47 Europe/Berlin] limit: 10
+[03-Nov-2025 20:55:47 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 20:55:47 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 20:55:47 Europe/Berlin] Rows encontradas: 10
+[03-Nov-2025 20:55:47 Europe/Berlin] Primera fila: {"id":22,"user_id":1,"concepto_id":22,"valor":"112500.00","fecha":"2025-11-03","detalle":"112500","notas":null,"created_at":"2025-11-03 12:17:22","concepto_nombre":"Gastos Extra","concepto_icono":"\u2795","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 20:55:47 Europe/Berlin] ============================
+[03-Nov-2025 20:56:09 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 20:56:09 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 20:56:09 Europe/Berlin] circuloId: 1
+[03-Nov-2025 20:56:09 Europe/Berlin] anio: null
+[03-Nov-2025 20:56:09 Europe/Berlin] mes: null
+[03-Nov-2025 20:56:09 Europe/Berlin] limit: 10
+[03-Nov-2025 20:56:09 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 20:56:09 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 20:56:10 Europe/Berlin] Rows encontradas: 10
+[03-Nov-2025 20:56:10 Europe/Berlin] Primera fila: {"id":22,"user_id":1,"concepto_id":22,"valor":"112500.00","fecha":"2025-11-03","detalle":"112500","notas":null,"created_at":"2025-11-03 12:17:22","concepto_nombre":"Gastos Extra","concepto_icono":"\u2795","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 20:56:10 Europe/Berlin] ============================
+[03-Nov-2025 20:56:35 Europe/Berlin] === getMovimientos DEBUG ===
+[03-Nov-2025 20:56:35 Europe/Berlin] tipoMovId: 2
+[03-Nov-2025 20:56:35 Europe/Berlin] circuloId: 1
+[03-Nov-2025 20:56:35 Europe/Berlin] anio: null
+[03-Nov-2025 20:56:35 Europe/Berlin] mes: null
+[03-Nov-2025 20:56:35 Europe/Berlin] limit: 10
+[03-Nov-2025 20:56:35 Europe/Berlin] Query: SELECT 
+                m.id,
+                m.user_id,
+                m.concepto_id,
+                m.valor,
+                m.fecha,
+                m.detalle,
+                m.notas,
+                m.created_at,
+                c.nombre as concepto_nombre,
+                c.icono as concepto_icono,
+                c.tipo_mov_id,
+                tm.nombre as tipo_movimiento,
+                u.nombre as usuario_nombre
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN usuarios u ON m.user_id = u.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1 AND mc.circulo_id = :circulo_id AND c.tipo_mov_id = :tipo_mov_id ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit
+[03-Nov-2025 20:56:35 Europe/Berlin] Params: {":circulo_id":1,":tipo_mov_id":2,":limit":10}
+[03-Nov-2025 20:56:36 Europe/Berlin] Rows encontradas: 10
+[03-Nov-2025 20:56:36 Europe/Berlin] Primera fila: {"id":22,"user_id":1,"concepto_id":22,"valor":"112500.00","fecha":"2025-11-03","detalle":"112500","notas":null,"created_at":"2025-11-03 12:17:22","concepto_nombre":"Gastos Extra","concepto_icono":"\u2795","tipo_mov_id":2,"tipo_movimiento":"Gasto","usuario_nombre":"Pilar"}
+[03-Nov-2025 20:56:36 Europe/Berlin] ============================

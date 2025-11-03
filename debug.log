@@ -1,0 +1,44 @@
+2025-11-03 19:02:31 - CONEXIÓN INFO
+Base de datos activa: lumen_academico_pdm
+---
+2025-11-03 19:02:32 - authenticate() called
+Email buscado: mariarestrepo77@gmail.com
+Rows retornadas: 1
+User found: YES
+User ID: 1, Email en BD: mariarestrepo77@gmail.com
+---
+Password verify: TRUE
+=============================
+2025-11-03 19:50:50 - CONEXIÓN INFO
+Base de datos activa: genialisis-wallet-prod
+---
+2025-11-03 19:50:50 - authenticate() called
+Email buscado: mariarestrepo77@gmail.com
+Rows retornadas: 1
+User found: YES
+User ID: 1, Email en BD: mariarestrepo77@gmail.com
+---
+Password verify: TRUE
+=============================
+2025-11-03 19:58:10 - CONEXIÓN INFO
+Base de datos activa: genialisis-wallet-prod
+---
+2025-11-03 19:58:10 - authenticate() called
+Email buscado: mariarestrepo77@gmail.com
+Rows retornadas: 1
+User found: YES
+User ID: 1, Email en BD: mariarestrepo77@gmail.com
+---
+Password verify: TRUE
+=============================
+2025-11-03 20:08:18 - CONEXIÓN INFO
+Base de datos activa: genialisis-wallet-prod
+---
+2025-11-03 20:08:18 - authenticate() called
+Email buscado: mariarestrepo77@gmail.com
+Rows retornadas: 1
+User found: YES
+User ID: 1, Email en BD: mariarestrepo77@gmail.com
+---
+Password verify: TRUE
+=============================
