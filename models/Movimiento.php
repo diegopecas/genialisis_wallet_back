@@ -151,34 +151,30 @@ class Movimiento
     public function getMovimientos($tipoMovId = null, $circuloId = null, $anio = null, $mes = null, $limit = 10)
     {
         try {
-            // DEBUG: Parámetros recibidos
-            error_log("=== getMovimientos DEBUG ===");
-            error_log("tipoMovId: " . ($tipoMovId ?? 'null'));
-            error_log("circuloId: " . ($circuloId ?? 'null'));
-            error_log("anio: " . ($anio ?? 'null'));
-            error_log("mes: " . ($mes ?? 'null'));
-            error_log("limit: " . $limit);
-
             $query = "SELECT 
-                m.id,
-                m.user_id,
-                m.concepto_id,
-                m.valor,
-                m.fecha,
-                m.detalle,
-                m.notas,
-                m.created_at,
-                c.nombre as concepto_nombre,
-                c.icono as concepto_icono,
-                c.tipo_mov_id,
-                tm.nombre as tipo_movimiento,
-                u.nombre as usuario_nombre
-              FROM movimientos m
-              INNER JOIN conceptos c ON m.concepto_id = c.id
-              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
-              INNER JOIN usuarios u ON m.user_id = u.id
-              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
-              WHERE 1=1";
+            m.id,
+            m.user_id,
+            m.concepto_id,
+            m.valor,
+            m.fecha,
+            m.detalle,
+            m.notas,
+            m.created_at,
+            c.nombre as concepto_nombre,
+            c.icono as concepto_icono,
+            c.tipo_mov_id,
+            cat.nombre as categoria_nombre,
+            cat.icono as categoria_icono,
+            cat.color as categoria_color,
+            tm.nombre as tipo_movimiento,
+            u.nombre as usuario_nombre
+          FROM movimientos m
+          INNER JOIN conceptos c ON m.concepto_id = c.id
+          INNER JOIN categorias cat ON c.categoria_id = cat.id
+          INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+          INNER JOIN usuarios u ON m.user_id = u.id
+          INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+          WHERE 1=1";
 
             $params = [];
 
@@ -206,10 +202,6 @@ class Movimiento
             $query .= " ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit";
             $params[':limit'] = $limit;
 
-            // DEBUG: Query final
-            error_log("Query: " . $query);
-            error_log("Params: " . json_encode($params));
-
             $stmt = $this->conn->prepare($query);
 
             foreach ($params as $key => $value) {
@@ -222,19 +214,9 @@ class Movimiento
 
             $stmt->execute();
 
-            $resultados = $stmt->fetchAll();
-
-            // DEBUG: Resultados
-            error_log("Rows encontradas: " . count($resultados));
-            if (count($resultados) > 0) {
-                error_log("Primera fila: " . json_encode($resultados[0]));
-            }
-            error_log("============================");
-
-            return $resultados;
+            return $stmt->fetchAll();
         } catch (PDOException $e) {
-            error_log("ERROR PDO en getMovimientos: " . $e->getMessage());
-            error_log("SQL State: " . $e->getCode());
+            error_log("Error en getMovimientos: " . $e->getMessage());
             return [];
         }
     }
@@ -450,7 +432,124 @@ class Movimiento
             return [];
         }
     }
+    /**
+     * Obtener totales agrupados por día
+     * 
+     * @param int $circuloId ID del círculo (opcional)
+     * @param int $anio Año (opcional)
+     * @param int $mes Mes (opcional)
+     * @return array Totales por día
+     */
+    public function getTotalesPorDia($circuloId = null, $anio = null, $mes = null)
+    {
+        try {
+            $query = "SELECT 
+                m.fecha,
+                COALESCE(SUM(CASE WHEN tm.nombre = 'Ingreso' THEN m.valor ELSE 0 END), 0) as total_ingresos,
+                COALESCE(SUM(CASE WHEN tm.nombre = 'Gasto' THEN m.valor ELSE 0 END), 0) as total_gastos,
+                COUNT(CASE WHEN tm.nombre = 'Ingreso' THEN 1 END) as cantidad_ingresos,
+                COUNT(CASE WHEN tm.nombre = 'Gasto' THEN 1 END) as cantidad_gastos
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1";
 
+            $params = [];
+
+            if ($circuloId) {
+                $query .= " AND mc.circulo_id = :circulo_id";
+                $params[':circulo_id'] = $circuloId;
+            }
+
+            if ($anio) {
+                $query .= " AND YEAR(m.fecha) = :anio";
+                $params[':anio'] = $anio;
+            }
+
+            if ($mes) {
+                $query .= " AND MONTH(m.fecha) = :mes";
+                $params[':mes'] = $mes;
+            }
+
+            $query .= " GROUP BY m.fecha
+                ORDER BY m.fecha DESC";
+
+            $stmt = $this->conn->prepare($query);
+
+            foreach ($params as $key => $value) {
+                $stmt->bindValue($key, $value);
+            }
+
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
+            error_log("Error en getTotalesPorDia: " . $e->getMessage());
+            return [];
+        }
+    }
+
+    /**
+     * Obtener totales agrupados por categoría
+     * 
+     * @param int $circuloId ID del círculo (opcional)
+     * @param int $anio Año (opcional)
+     * @param int $mes Mes (opcional)
+     * @return array Totales por categoría
+     */
+    public function getTotalesPorCategoria($circuloId = null, $anio = null, $mes = null)
+    {
+        try {
+            $query = "SELECT 
+                cat.id as categoria_id,
+                cat.nombre as categoria_nombre,
+                cat.icono as categoria_icono,
+                cat.color as categoria_color,
+                tm.nombre as tipo_movimiento,
+                COUNT(m.id) as cantidad,
+                SUM(m.valor) as total
+              FROM movimientos m
+              INNER JOIN conceptos c ON m.concepto_id = c.id
+              INNER JOIN categorias cat ON c.categoria_id = cat.id
+              INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE 1=1";
+
+            $params = [];
+
+            if ($circuloId) {
+                $query .= " AND mc.circulo_id = :circulo_id";
+                $params[':circulo_id'] = $circuloId;
+            }
+
+            if ($anio) {
+                $query .= " AND YEAR(m.fecha) = :anio";
+                $params[':anio'] = $anio;
+            }
+
+            if ($mes) {
+                $query .= " AND MONTH(m.fecha) = :mes";
+                $params[':mes'] = $mes;
+            }
+
+            $query .= " GROUP BY cat.id, cat.nombre, cat.icono, cat.color, tm.nombre
+                ORDER BY tm.nombre ASC, total DESC";
+
+            $stmt = $this->conn->prepare($query);
+
+            foreach ($params as $key => $value) {
+                $stmt->bindValue($key, $value);
+            }
+
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
+            error_log("Error en getTotalesPorCategoria: " . $e->getMessage());
+            return [];
+        }
+    }
     /**
      * Eliminar movimiento
      * 
@@ -489,4 +588,58 @@ class Movimiento
 
         return $movimiento;
     }
+    /**
+ * Obtener datos para gráfico de barras por categoría
+ * 
+ * @param int $circuloId ID del círculo (opcional)
+ * @param int $anio Año (opcional)
+ * @param int $mes Mes (opcional)
+ * @return array Datos para gráfico
+ */
+public function getGraficoCategoria($circuloId = null, $anio = null, $mes = null)
+{
+    try {
+        $query = "SELECT 
+                cat.id as categoria_id,
+                cat.nombre as categoria_nombre,
+                cat.icono as categoria_icono,
+                cat.color as categoria_color,
+                COALESCE(SUM(CASE WHEN tm.nombre = 'Ingreso' THEN m.valor ELSE 0 END), 0) as total_ingresos,
+                COALESCE(SUM(CASE WHEN tm.nombre = 'Gasto' THEN m.valor ELSE 0 END), 0) as total_gastos
+              FROM categorias cat
+              LEFT JOIN conceptos c ON cat.id = c.categoria_id
+              LEFT JOIN movimientos m ON c.id = m.concepto_id
+              LEFT JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
+              LEFT JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+              WHERE cat.circulo_id = :circulo_id";
+
+        $params = [':circulo_id' => $circuloId];
+
+        if ($anio) {
+            $query .= " AND YEAR(m.fecha) = :anio";
+            $params[':anio'] = $anio;
+        }
+
+        if ($mes) {
+            $query .= " AND MONTH(m.fecha) = :mes";
+            $params[':mes'] = $mes;
+        }
+
+        $query .= " GROUP BY cat.id, cat.nombre, cat.icono, cat.color
+                ORDER BY cat.nombre ASC";
+
+        $stmt = $this->conn->prepare($query);
+
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value);
+        }
+
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    } catch (PDOException $e) {
+        error_log("Error en getGraficoCategoria: " . $e->getMessage());
+        return [];
+    }
+}   
 }

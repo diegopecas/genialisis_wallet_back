@@ -249,7 +249,47 @@ class MovimientosController
             'datos' => $evolucion
         ], 'Evolución mensual obtenida correctamente');
     }
+    /**
+     * Obtener totales agrupados por día
+     * GET /movimientos/totales/dia?circulo_id={id}&anio={2025}&mes={11}
+     */
+    public function getTotalesPorDia()
+    {
+        $payload = $this->validateAuth();
+        $userId = $payload['user_id'];
 
+        // Obtener parámetros
+        $circuloId = isset($_GET['circulo_id']) ? intval($_GET['circulo_id']) : null;
+        $anio = isset($_GET['anio']) ? intval($_GET['anio']) : null;
+        $mes = isset($_GET['mes']) ? intval($_GET['mes']) : null;
+
+        $totales = $this->movimientoModel->getTotalesPorDia($circuloId, $anio, $mes);
+
+        Response::success([
+            'totales' => $totales
+        ], 'Totales por día obtenidos correctamente');
+    }
+
+    /**
+     * Obtener totales agrupados por categoría
+     * GET /movimientos/totales/categoria?circulo_id={id}&anio={2025}&mes={11}
+     */
+    public function getTotalesPorCategoria()
+    {
+        $payload = $this->validateAuth();
+        $userId = $payload['user_id'];
+
+        // Obtener parámetros
+        $circuloId = isset($_GET['circulo_id']) ? intval($_GET['circulo_id']) : null;
+        $anio = isset($_GET['anio']) ? intval($_GET['anio']) : null;
+        $mes = isset($_GET['mes']) ? intval($_GET['mes']) : null;
+
+        $totales = $this->movimientoModel->getTotalesPorCategoria($circuloId, $anio, $mes);
+
+        Response::success([
+            'totales' => $totales
+        ], 'Totales por categoría obtenidos correctamente');
+    }
     /**
      * Validar autenticación del usuario
      */
@@ -268,5 +308,29 @@ class MovimientosController
         }
 
         return $payload;
+    }
+    /**
+     * Obtener datos para gráfico de barras por categoría
+     * GET /movimientos/grafico/categoria?circulo_id={id}&anio={2025}&mes={11}
+     */
+    public function getGraficoCategoria()
+    {
+        $payload = $this->validateAuth();
+        $userId = $payload['user_id'];
+
+        // Obtener parámetros
+        $circuloId = isset($_GET['circulo_id']) ? intval($_GET['circulo_id']) : null;
+        $anio = isset($_GET['anio']) ? intval($_GET['anio']) : null;
+        $mes = isset($_GET['mes']) ? intval($_GET['mes']) : null;
+
+        if (!$circuloId) {
+            Response::validationError('circulo_id es requerido');
+        }
+
+        $datos = $this->movimientoModel->getGraficoCategoria($circuloId, $anio, $mes);
+
+        Response::success([
+            'categorias' => $datos
+        ], 'Datos de gráfico por categoría obtenidos correctamente');
     }
 }

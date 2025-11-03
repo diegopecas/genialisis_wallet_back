@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Circle Finance API - Router Principal
  * Backend PHP con API REST
@@ -48,100 +49,124 @@ try {
     // ============================================================
     // RUTAS DE AUTENTICACIÓN
     // ============================================================
-    
+
     if ($uriParts[0] === 'auth') {
         $authController = new AuthController();
-        
+
         // POST /auth/login
         if ($method === 'POST' && $uriParts[1] === 'login') {
             $authController->login();
             exit;
         }
-        
+
         // GET /auth/me
         if ($method === 'GET' && $uriParts[1] === 'me') {
             $authController->me();
             exit;
         }
     }
-    
+
     // ============================================================
     // RUTAS DE CONCEPTOS
     // ============================================================
-    
+
     if ($uriParts[0] === 'conceptos') {
         $conceptosController = new ConceptosController();
-        
+
         // GET /conceptos/all
         if ($method === 'GET' && isset($uriParts[1]) && $uriParts[1] === 'all') {
             $conceptosController->getAllConceptos();
             exit;
         }
-        
+
         // GET /conceptos
         if ($method === 'GET') {
             $conceptosController->getConceptos();
             exit;
         }
     }
-    
+
     // ============================================================
     // RUTAS DE MOVIMIENTOS
     // ============================================================
-    
+
     if ($uriParts[0] === 'movimientos') {
         $movimientosController = new MovimientosController();
-        
+
         // GET /movimientos/balance/detalle
-        if ($method === 'GET' && isset($uriParts[1]) && $uriParts[1] === 'balance' 
-            && isset($uriParts[2]) && $uriParts[2] === 'detalle') {
+        if (
+            $method === 'GET' && isset($uriParts[1]) && $uriParts[1] === 'balance'
+            && isset($uriParts[2]) && $uriParts[2] === 'detalle'
+        ) {
             $movimientosController->getBalanceDetallado();
             exit;
         }
-        
+        // GET /movimientos/totales/categoria
+        if (
+            $method === 'GET' && isset($uriParts[1]) && $uriParts[1] === 'totales'
+            && isset($uriParts[2]) && $uriParts[2] === 'categoria'
+        ) {
+            $movimientosController->getTotalesPorCategoria();
+            exit;
+        }
+
+        // GET /movimientos/totales/dia
+        if (
+            $method === 'GET' && isset($uriParts[1]) && $uriParts[1] === 'totales'
+            && isset($uriParts[2]) && $uriParts[2] === 'dia'
+        ) {
+            $movimientosController->getTotalesPorDia();
+            exit;
+        }
         // GET /movimientos/balance
         if ($method === 'GET' && isset($uriParts[1]) && $uriParts[1] === 'balance') {
             $movimientosController->getBalance();
             exit;
         }
-        
+        // GET /movimientos/grafico/categoria
+        if (
+            $method === 'GET' && isset($uriParts[1]) && $uriParts[1] === 'grafico'
+            && isset($uriParts[2]) && $uriParts[2] === 'categoria'
+        ) {
+            $movimientosController->getGraficoCategoria();
+            exit;
+        }
         // GET /movimientos/evolucion
         if ($method === 'GET' && isset($uriParts[1]) && $uriParts[1] === 'evolucion') {
             $movimientosController->getEvolucion();
             exit;
         }
-        
+
         // GET /movimientos/{id}
         if ($method === 'GET' && isset($uriParts[1]) && is_numeric($uriParts[1])) {
             $movimientosController->getById($uriParts[1]);
             exit;
         }
-        
+
         // GET /movimientos
         if ($method === 'GET') {
             $movimientosController->getMovimientos();
             exit;
         }
-        
+
         // POST /movimientos
         if ($method === 'POST') {
             $movimientosController->create();
             exit;
         }
-        
+
         // DELETE /movimientos/{id}
         if ($method === 'DELETE' && isset($uriParts[1]) && is_numeric($uriParts[1])) {
             $movimientosController->delete($uriParts[1]);
             exit;
         }
     }
-    
+
     // ============================================================
     // RUTA NO ENCONTRADA
     // ============================================================
-    
+
     Response::notFound('Endpoint no encontrado');
-    
 } catch (Exception $e) {
     error_log("Error en router: " . $e->getMessage());
     Response::serverError('Error interno del servidor');
