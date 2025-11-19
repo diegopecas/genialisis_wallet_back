@@ -42,3 +42,69 @@ User ID: 1, Email en BD: mariarestrepo77@gmail.com
 ---
 Password verify: TRUE
 =============================
+2025-11-19 20:24:21 - CONEXIÓN INFO
+Base de datos activa: genialisis-wallet-prod
+---
+2025-11-19 20:24:22 - authenticate() called
+Email buscado: mariarestrepo77@gmail.com
+Rows retornadas: 1
+User found: YES
+User ID: 1, Email en BD: mariarestrepo77@gmail.com
+---
+Password verify: TRUE
+=============================
+2025-11-19 22:22:10 - CONEXIÓN INFO
+Base de datos activa: genialisis-wallet-prod
+---
+2025-11-19 22:22:10 - authenticate() called
+Email buscado: mariarestrepo77@gmail.com
+Rows retornadas: 1
+User found: YES
+User ID: 1, Email en BD: mariarestrepo77@gmail.com
+---
+Password verify: FALSE
+=============================
+2025-11-19 22:22:19 - CONEXIÓN INFO
+Base de datos activa: genialisis-wallet-prod
+---
+2025-11-19 22:22:20 - authenticate() called
+Email buscado: mariarestrepo77@gmail.com
+Rows retornadas: 1
+User found: YES
+User ID: 1, Email en BD: mariarestrepo77@gmail.com
+---
+Password verify: FALSE
+=============================
+2025-11-19 22:25:21 - CONEXIÓN INFO
+Base de datos activa: genialisis-wallet-prod
+---
+2025-11-19 22:25:21 - authenticate() called
+Email buscado: mariarestrepo77@gmail.com
+Rows retornadas: 1
+User found: YES
+User ID: 1, Email en BD: mariarestrepo77@gmail.com
+---
+Password verify: FALSE
+=============================
+2025-11-19 22:29:24 - CONEXIÓN INFO
+Base de datos activa: genialisis-wallet-qa
+---
+2025-11-19 22:29:24 - authenticate() called
+Email buscado: mariarestrepo77@gmail.com
+Rows retornadas: 1
+User found: YES
+User ID: 1, Email en BD: mariarestrepo77@gmail.com
+---
+Password verify: FALSE
+=============================
+2025-11-19 22:30:53 - CONEXIÓN INFO
+Base de datos activa: genialisis-wallet-qa
+---
+2025-11-19 22:30:53 - authenticate() called
+Email buscado: mariarestrepo77@gmail.com
+Rows retornadas: 1
+User found: YES
+User ID: 1, Email en BD: mariarestrepo77@gmail.com
+---
+Password verify: TRUE
+=============================

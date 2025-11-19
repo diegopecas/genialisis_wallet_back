@@ -5,7 +5,7 @@
  */
 
 define('DB_HOST', '92.205.2.161');
-define('DB_NAME', 'genialisis-wallet-prod');
+define('DB_NAME', 'genialisis-wallet-qa');
 define('DB_USERNAME', 'admin-genialisis-wallet-prod');
 define('DB_PASSWORD', 'Pd&dIeY]us1L');
 define('DB_CHARSET', 'utf8mb4');

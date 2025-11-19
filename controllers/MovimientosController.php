@@ -112,12 +112,11 @@ class MovimientosController
         $mes = isset($_GET['mes']) ? intval($_GET['mes']) : null;
         $limit = isset($_GET['limit']) ? intval($_GET['limit']) : 10;
 
-        // Validar límite
-        if ($limit < 1 || $limit > 100) {
+        // Validar límite mínimo
+        if ($limit < 1) {
             $limit = 10;
         }
 
-        // CAMBIO: Ya no pasar userId como primer parámetro
         // Obtener movimientos
         $movimientos = $this->movimientoModel->getMovimientos(
             $tipoMovId,
@@ -200,7 +199,6 @@ class MovimientosController
         $anio = isset($_GET['anio']) ? intval($_GET['anio']) : null;
         $mes = isset($_GET['mes']) ? intval($_GET['mes']) : null;
 
-        // CAMBIO: Ya no pasar userId
         $balance = $this->movimientoModel->getBalance($circuloId, $anio, $mes);
 
         Response::success($balance, 'Balance obtenido correctamente');
@@ -220,7 +218,6 @@ class MovimientosController
         $anio = isset($_GET['anio']) ? intval($_GET['anio']) : null;
         $mes = isset($_GET['mes']) ? intval($_GET['mes']) : null;
 
-        // CAMBIO: Ya no pasar userId
         $detalle = $this->movimientoModel->getBalanceDetallado($circuloId, $anio, $mes);
 
         Response::success([
@@ -241,7 +238,6 @@ class MovimientosController
         $circuloId = isset($_GET['circulo_id']) ? intval($_GET['circulo_id']) : null;
         $anio = isset($_GET['anio']) ? intval($_GET['anio']) : date('Y');
 
-        // CAMBIO: Ya no pasar userId
         $evolucion = $this->movimientoModel->getEvolucionMensual($circuloId, $anio);
 
         Response::success([

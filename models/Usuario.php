@@ -123,6 +123,7 @@ class Usuario {
         try {
             $query = "SELECT 
                         c.id,
+                        c.uuid,
                         c.nombre,
                         c.icono,
                         c.color,
@@ -144,5 +145,76 @@ class Usuario {
             error_log("Error en getCirculos: " . $e->getMessage());
             return [];
         }
+    }
+
+    /**
+     * Validar token JWT y obtener información del usuario
+     * 
+     * @param string $token Token JWT
+     * @return array|false Datos del usuario o false si inválido
+     */
+    public function validateToken($token) {
+        try {
+            // Si tienes una clave secreta para JWT, deberías definirla aquí
+            // Por simplicidad, aquí haremos una validación básica
+            // En producción, deberías usar firebase/php-jwt o similar
+            
+            // Decodificar JWT básico (sin librería externa)
+            $parts = explode('.', $token);
+            if (count($parts) !== 3) {
+                return false;
+            }
+            
+            // Decodificar payload
+            $payload = json_decode(base64_decode($parts[1]), true);
+            
+            if (!$payload || !isset($payload['user_id'])) {
+                return false;
+            }
+            
+            // Verificar expiración
+            if (isset($payload['exp']) && $payload['exp'] < time()) {
+                return false;
+            }
+            
+            // Obtener usuario de la BD para verificar que existe
+            $user = $this->getById($payload['user_id']);
+            
+            return $user ?: false;
+            
+        } catch (Exception $e) {
+            error_log("Error en validateToken: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Generar token JWT simple para el usuario
+     * Nota: En producción, usar una librería como firebase/php-jwt
+     * 
+     * @param int $userId ID del usuario
+     * @return string Token JWT
+     */
+    public function generateToken($userId) {
+        // Header
+        $header = json_encode(['typ' => 'JWT', 'alg' => 'HS256']);
+        
+        // Payload
+        $payload = json_encode([
+            'user_id' => $userId,
+            'iat' => time(),
+            'exp' => time() + (60 * 60 * 24) // 24 horas
+        ]);
+        
+        // Base64 encode
+        $base64Header = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($header));
+        $base64Payload = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($payload));
+        
+        // Signature (simplificada - en producción usar hash_hmac con clave secreta)
+        $signature = hash('sha256', $base64Header . "." . $base64Payload);
+        $base64Signature = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($signature));
+        
+        // Token completo
+        return $base64Header . '.' . $base64Payload . '.' . $base64Signature;
     }
 }

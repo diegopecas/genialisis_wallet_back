@@ -95,7 +95,9 @@ class Concepto {
         try {
             $query = "SELECT 
                         c.id,
+                        c.uuid,
                         c.categoria_id,
+                        c.categoria_uuid,
                         c.tipo_mov_id,
                         c.nombre,
                         c.icono,
@@ -139,6 +141,7 @@ class Concepto {
         try {
             $query = "SELECT 
                         c.id,
+                        c.uuid,
                         c.nombre,
                         c.icono,
                         c.tipo_mov_id,
@@ -171,6 +174,149 @@ class Concepto {
         } catch (PDOException $e) {
             error_log("Error en getAllByCirculo: " . $e->getMessage());
             return [];
+        }
+    }
+
+    // =====================================
+    // MÉTODOS PARA SINCRONIZACIÓN OFFLINE
+    // =====================================
+
+    /**
+     * Crear concepto para sincronización offline (con UUID)
+     * Nota: Este método es diferente al create tradicional porque maneja UUID
+     */
+    public function createWithUuid($uuid, $categoriaUuid, $tipoMovId, $nombre, $icono = '➕', $esReal = true, $requiereDetalle = false, $descripcion = null) {
+        try {
+            // Verificar si el UUID ya existe
+            $existing = $this->getIdByUuid($uuid);
+            if ($existing) {
+                return $existing;
+            }
+
+            // Obtener categoria_id del UUID
+            $categoriaId = $this->getCategoriaIdByUuid($categoriaUuid);
+            if (!$categoriaId) {
+                throw new Exception("Categoría no encontrada con UUID: $categoriaUuid");
+            }
+
+            $query = "INSERT INTO conceptos 
+                      (uuid, categoria_id, categoria_uuid, tipo_mov_id, nombre, icono, es_real, requiere_detalle, descripcion, activo)
+                      VALUES 
+                      (:uuid, :categoria_id, :categoria_uuid, :tipo_mov_id, :nombre, :icono, :es_real, :requiere_detalle, :descripcion, 1)";
+
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':uuid', $uuid);
+            $stmt->bindParam(':categoria_id', $categoriaId, PDO::PARAM_INT);
+            $stmt->bindParam(':categoria_uuid', $categoriaUuid);
+            $stmt->bindParam(':tipo_mov_id', $tipoMovId, PDO::PARAM_INT);
+            $stmt->bindParam(':nombre', $nombre);
+            $stmt->bindParam(':icono', $icono);
+            $stmt->bindValue(':es_real', $esReal ? 1 : 0, PDO::PARAM_INT);
+            $stmt->bindValue(':requiere_detalle', $requiereDetalle ? 1 : 0, PDO::PARAM_INT);
+            $stmt->bindParam(':descripcion', $descripcion);
+            
+            if ($stmt->execute()) {
+                return $this->conn->lastInsertId();
+            }
+            
+            return null;
+        } catch (Exception $e) {
+            error_log("Error en createWithUuid (Concepto): " . $e->getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Actualizar concepto por UUID
+     */
+    public function updateByUuid($uuid, $nombre, $icono = null, $esReal = null, $requiereDetalle = null, $descripcion = null) {
+        try {
+            $query = "UPDATE conceptos SET nombre = :nombre";
+            
+            if ($icono !== null) {
+                $query .= ", icono = :icono";
+            }
+            if ($esReal !== null) {
+                $query .= ", es_real = :es_real";
+            }
+            if ($requiereDetalle !== null) {
+                $query .= ", requiere_detalle = :requiere_detalle";
+            }
+            
+            $query .= ", descripcion = :descripcion WHERE uuid = :uuid";
+
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':uuid', $uuid);
+            $stmt->bindParam(':nombre', $nombre);
+            
+            if ($icono !== null) {
+                $stmt->bindParam(':icono', $icono);
+            }
+            if ($esReal !== null) {
+                $stmt->bindValue(':es_real', $esReal ? 1 : 0, PDO::PARAM_INT);
+            }
+            if ($requiereDetalle !== null) {
+                $stmt->bindValue(':requiere_detalle', $requiereDetalle ? 1 : 0, PDO::PARAM_INT);
+            }
+            
+            $stmt->bindParam(':descripcion', $descripcion);
+            
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error en updateByUuid (Concepto): " . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Eliminar (desactivar) concepto por UUID
+     */
+    public function deleteByUuid($uuid) {
+        try {
+            $query = "UPDATE conceptos SET activo = 0 WHERE uuid = :uuid";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':uuid', $uuid);
+            
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error en deleteByUuid (Concepto): " . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Obtener ID por UUID (método auxiliar)
+     */
+    public function getIdByUuid($uuid) {
+        try {
+            $query = "SELECT id FROM conceptos WHERE uuid = :uuid";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':uuid', $uuid);
+            $stmt->execute();
+            
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result ? $result['id'] : null;
+        } catch (PDOException $e) {
+            error_log("Error en getIdByUuid (Concepto): " . $e->getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Obtener categoria_id por UUID (método auxiliar privado)
+     */
+    private function getCategoriaIdByUuid($categoriaUuid) {
+        try {
+            $query = "SELECT id FROM categorias WHERE uuid = :uuid";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':uuid', $categoriaUuid);
+            $stmt->execute();
+            
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result ? $result['id'] : null;
+        } catch (PDOException $e) {
+            error_log("Error en getCategoriaIdByUuid (Concepto): " . $e->getMessage());
+            return null;
         }
     }
 }
