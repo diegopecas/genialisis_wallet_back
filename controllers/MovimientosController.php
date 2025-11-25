@@ -99,6 +99,7 @@ class MovimientosController
     /**
      * Obtener movimientos con filtros
      * GET /movimientos?tipo_mov_id={1|2}&circulo_id={id}&anio={2025}&mes={11}&limit={10}
+     * Si limit=0 o no se especifica limit, trae todos los movimientos
      */
     public function getMovimientos()
     {
@@ -110,11 +111,11 @@ class MovimientosController
         $circuloId = isset($_GET['circulo_id']) ? intval($_GET['circulo_id']) : null;
         $anio = isset($_GET['anio']) ? intval($_GET['anio']) : null;
         $mes = isset($_GET['mes']) ? intval($_GET['mes']) : null;
-        $limit = isset($_GET['limit']) ? intval($_GET['limit']) : 10;
-
-        // Validar límite mínimo
-        if ($limit < 1) {
-            $limit = 10;
+        
+        // Si limit=0 o no viene, significa "sin límite" (traer todos)
+        $limit = isset($_GET['limit']) ? intval($_GET['limit']) : null;
+        if ($limit === 0) {
+            $limit = null; // null = sin límite
         }
 
         // Obtener movimientos

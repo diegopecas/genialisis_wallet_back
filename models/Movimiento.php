@@ -140,15 +140,14 @@ class Movimiento
     /**
      * Obtener movimientos filtrados
      * 
-     * @param int $userId ID del usuario
      * @param int $tipoMovId Tipo de movimiento (1=Ingreso, 2=Gasto, null=Todos)
      * @param int $circuloId ID del círculo (opcional)
      * @param int $anio Año (opcional)
      * @param int $mes Mes (opcional)
-     * @param int $limit Límite de resultados
+     * @param int|null $limit Límite de resultados (null = sin límite)
      * @return array Lista de movimientos
      */
-    public function getMovimientos($tipoMovId = null, $circuloId = null, $anio = null, $mes = null, $limit = 10)
+    public function getMovimientos($tipoMovId = null, $circuloId = null, $anio = null, $mes = null, $limit = null)
     {
         try {
             $query = "SELECT 
@@ -199,8 +198,13 @@ class Movimiento
                 $params[':mes'] = $mes;
             }
 
-            $query .= " ORDER BY m.fecha DESC, m.created_at DESC LIMIT :limit";
-            $params[':limit'] = $limit;
+            $query .= " ORDER BY m.fecha DESC, m.created_at DESC";
+            
+            // Solo agregar LIMIT si se especifica
+            if ($limit !== null) {
+                $query .= " LIMIT :limit";
+                $params[':limit'] = $limit;
+            }
 
             $stmt = $this->conn->prepare($query);
 
