@@ -749,4 +749,77 @@ class Movimiento
             return [];
         }
     }
+    /**
+     * Obtener años y meses disponibles (con registros)
+     * 
+     * @param int $circuloId ID del círculo
+     * @param int $tipoMovId Tipo de movimiento (1=Ingreso, 2=Gasto, null=Todos)
+     * @return array Años y meses disponibles
+     */
+    public function getPeriodosDisponibles($circuloId = null, $tipoMovId = null)
+    {
+        try {
+            $query = "SELECT DISTINCT 
+                    YEAR(m.fecha) as anio,
+                    MONTH(m.fecha) as mes
+                  FROM movimientos m
+                  INNER JOIN conceptos c ON m.concepto_id = c.id
+                  INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+                  WHERE 1=1";
+
+            $params = [];
+
+            if ($circuloId) {
+                $query .= " AND mc.circulo_id = :circulo_id";
+                $params[':circulo_id'] = $circuloId;
+            }
+
+            if ($tipoMovId) {
+                $query .= " AND c.tipo_mov_id = :tipo_mov_id";
+                $params[':tipo_mov_id'] = $tipoMovId;
+            }
+
+            $query .= " ORDER BY anio DESC, mes DESC";
+
+            $stmt = $this->conn->prepare($query);
+
+            foreach ($params as $key => $value) {
+                $stmt->bindValue($key, $value);
+            }
+
+            $stmt->execute();
+
+            $periodos = $stmt->fetchAll();
+
+            // Agrupar por año
+            $anios = [];
+            foreach ($periodos as $periodo) {
+                $anio = intval($periodo['anio']);
+                $mes = intval($periodo['mes']);
+
+                if (!isset($anios[$anio])) {
+                    $anios[$anio] = [];
+                }
+
+                if (!in_array($mes, $anios[$anio])) {
+                    $anios[$anio][] = $mes;
+                }
+            }
+
+            // Formatear respuesta
+            $resultado = [];
+            foreach ($anios as $anio => $meses) {
+                sort($meses);
+                $resultado[] = [
+                    'anio' => $anio,
+                    'meses' => $meses
+                ];
+            }
+
+            return $resultado;
+        } catch (PDOException $e) {
+            error_log("Error en getPeriodosDisponibles: " . $e->getMessage());
+            return [];
+        }
+    }
 }

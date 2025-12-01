@@ -146,6 +146,15 @@ try {
             exit;
         }
 
+        // GET /movimientos/periodos/disponibles
+        if (
+            $method === 'GET' && isset($uriParts[1]) && $uriParts[1] === 'periodos'
+            && isset($uriParts[2]) && $uriParts[2] === 'disponibles'
+        ) {
+            $movimientosController->getPeriodosDisponibles();
+            exit;
+        }
+
         // GET /movimientos/{id}
         if ($method === 'GET' && isset($uriParts[1]) && is_numeric($uriParts[1])) {
             $movimientosController->getById($uriParts[1]);

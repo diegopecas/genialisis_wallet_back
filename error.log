@@ -4,3 +4,27 @@
 Stack trace:
 #0 {main}
   thrown in C:\xampp\htdocs\genialisis_wallet_back\index.php on line 145
+[01-Dec-2025 05:13:07 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method MovimientosController::getSaldoAnterior() in C:\xampp\htdocs\genialisis_wallet_back\index.php:145
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\genialisis_wallet_back\index.php on line 145
+[01-Dec-2025 05:22:08 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method MovimientosController::getSaldoAnterior() in C:\xampp\htdocs\genialisis_wallet_back\index.php:145
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\genialisis_wallet_back\index.php on line 145
+[01-Dec-2025 05:24:07 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method MovimientosController::getSaldoAnterior() in C:\xampp\htdocs\genialisis_wallet_back\index.php:145
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\genialisis_wallet_back\index.php on line 145
+[01-Dec-2025 05:26:03 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method MovimientosController::getSaldoAnterior() in C:\xampp\htdocs\genialisis_wallet_back\index.php:145
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\genialisis_wallet_back\index.php on line 145
+[01-Dec-2025 05:30:53 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method MovimientosController::getSaldoAnterior() in C:\xampp\htdocs\genialisis_wallet_back\index.php:145
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\genialisis_wallet_back\index.php on line 145
+[01-Dec-2025 05:32:27 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method MovimientosController::getSaldoAnterior() in C:\xampp\htdocs\genialisis_wallet_back\index.php:145
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\genialisis_wallet_back\index.php on line 145

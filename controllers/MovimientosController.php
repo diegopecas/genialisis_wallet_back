@@ -111,7 +111,7 @@ class MovimientosController
         $circuloId = isset($_GET['circulo_id']) ? intval($_GET['circulo_id']) : null;
         $anio = isset($_GET['anio']) ? intval($_GET['anio']) : null;
         $mes = isset($_GET['mes']) ? intval($_GET['mes']) : null;
-        
+
         // Si limit=0 o no viene, significa "sin límite" (traer todos)
         $limit = isset($_GET['limit']) ? intval($_GET['limit']) : null;
         if ($limit === 0) {
@@ -415,5 +415,24 @@ class MovimientosController
         Response::success([
             'categorias' => $datos
         ], 'Datos de gráfico por categoría obtenidos correctamente');
+    }
+    /**
+     * Obtener periodos disponibles (años y meses con registros)
+     * GET /movimientos/periodos/disponibles?circulo_id={id}&tipo_mov_id={1|2}
+     */
+    public function getPeriodosDisponibles()
+    {
+        $payload = $this->validateAuth();
+        $userId = $payload['user_id'];
+
+        // Obtener parámetros
+        $circuloId = isset($_GET['circulo_id']) ? intval($_GET['circulo_id']) : null;
+        $tipoMovId = isset($_GET['tipo_mov_id']) ? intval($_GET['tipo_mov_id']) : null;
+
+        $periodos = $this->movimientoModel->getPeriodosDisponibles($circuloId, $tipoMovId);
+
+        Response::success([
+            'periodos' => $periodos
+        ], 'Periodos disponibles obtenidos correctamente');
     }
 }
