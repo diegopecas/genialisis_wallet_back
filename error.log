@@ -1,30 +1,501 @@
-[01-Dec-2025 04:20:01 Europe/Berlin] Error en getById: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.uuid' in 'SELECT'
-[01-Dec-2025 04:21:56 Europe/Berlin] Error en getById: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.categoria_uuid' in 'SELECT'
-[01-Dec-2025 04:24:03 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method MovimientosController::getSaldoAnterior() in C:\xampp\htdocs\genialisis_wallet_back\index.php:145
+[01-Dec-2025 06:59:22 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 06:59:22 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 06:59:22 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 06:59:22 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 06:59:22 Europe/Berlin] === UPDATE MOVIMIENTO DEBUG ===
+[01-Dec-2025 06:59:22 Europe/Berlin] Movimiento ID: 347
+[01-Dec-2025 06:59:22 Europe/Berlin] User ID del token: 1
+[01-Dec-2025 06:59:23 Europe/Berlin] Movimiento encontrado - creado por user_id: 2
+[01-Dec-2025 06:59:23 Europe/Berlin] ¿Es creador del movimiento? NO
+[01-Dec-2025 06:59:23 Europe/Berlin] Círculos del movimiento: 1
+[01-Dec-2025 06:59:23 Europe/Berlin] ¿Es admin de algún círculo? SI
+[01-Dec-2025 06:59:23 Europe/Berlin] ✅ Permiso concedido: Es admin del círculo
+[01-Dec-2025 07:06:36 Europe/Berlin] === INICIO UPDATE ===
+[01-Dec-2025 07:06:36 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:06:36 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:06:36 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:06:36 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:06:36 Europe/Berlin] 1. Auth OK - userId: 1
+[01-Dec-2025 07:06:36 Europe/Berlin] 2. Movimiento obtenido
+[01-Dec-2025 07:06:36 Europe/Berlin] 3. Movimiento existe - user_id: 2
+[01-Dec-2025 07:06:36 Europe/Berlin] 4. ¿Es creador? NO
+[01-Dec-2025 07:06:36 Europe/Berlin] 5. No es creador, verificando admin...
+[01-Dec-2025 07:06:36 Europe/Berlin] 6. Círculos: 1
+[01-Dec-2025 07:06:37 Europe/Berlin] 7. ¿Es admin? SI
+[01-Dec-2025 07:06:37 Europe/Berlin] 8. Permiso concedido: Admin del círculo
+[01-Dec-2025 07:06:37 Europe/Berlin] 9. Permisos OK, obteniendo datos del body...
+[01-Dec-2025 07:06:37 Europe/Berlin] 10. Raw body length: 102
+[01-Dec-2025 07:06:37 Europe/Berlin] 11. JSON decoded. Keys: concepto_id, valor, fecha, detalle, circulos_ids
+[01-Dec-2025 07:06:37 Europe/Berlin] 12. Iniciando validaciones...
+[01-Dec-2025 07:06:37 Europe/Berlin] 13. Validando concepto_id: 44
+[01-Dec-2025 07:06:37 Europe/Berlin] 14. Buscando concepto en BD...
+[01-Dec-2025 07:06:37 Europe/Berlin] 15. Concepto encontrado: SI
+[01-Dec-2025 07:06:37 Europe/Berlin] 20. Validaciones OK, llamando a modelo->update()...
+[01-Dec-2025 07:06:38 Europe/Berlin] 21. Modelo->update() ejecutado
+[01-Dec-2025 07:06:38 Europe/Berlin] 22. ERROR: modelo->update() retornó NULL o FALSE
+[01-Dec-2025 07:12:49 Europe/Berlin] === INICIO UPDATE ===
+[01-Dec-2025 07:12:49 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:12:49 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:12:49 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:12:49 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:12:49 Europe/Berlin] 1. Auth OK - userId: 1
+[01-Dec-2025 07:12:50 Europe/Berlin] 2. Movimiento obtenido
+[01-Dec-2025 07:12:50 Europe/Berlin] 3. Movimiento existe - user_id: 2
+[01-Dec-2025 07:12:50 Europe/Berlin] 4. ¿Es creador? NO
+[01-Dec-2025 07:12:50 Europe/Berlin] 5. No es creador, verificando admin...
+[01-Dec-2025 07:12:50 Europe/Berlin] 6. Círculos: 1
+[01-Dec-2025 07:12:50 Europe/Berlin] 7. ¿Es admin? SI
+[01-Dec-2025 07:12:50 Europe/Berlin] 8. Permiso concedido: Admin del círculo
+[01-Dec-2025 07:12:50 Europe/Berlin] 9. Permisos OK, obteniendo datos del body...
+[01-Dec-2025 07:12:50 Europe/Berlin] 10. Raw body length: 102
+[01-Dec-2025 07:12:50 Europe/Berlin] 11. JSON decoded. Keys: concepto_id, valor, fecha, detalle, circulos_ids
+[01-Dec-2025 07:12:50 Europe/Berlin] 12. Iniciando validaciones...
+[01-Dec-2025 07:12:50 Europe/Berlin] 13. Validando concepto_id: 44
+[01-Dec-2025 07:12:50 Europe/Berlin] 14. Buscando concepto en BD...
+[01-Dec-2025 07:12:50 Europe/Berlin] 15. Concepto encontrado: SI
+[01-Dec-2025 07:12:50 Europe/Berlin] 20. Validaciones OK, llamando a modelo->update()...
+[01-Dec-2025 07:12:51 Europe/Berlin] Update - Movimiento encontrado, procediendo con actualización
+[01-Dec-2025 07:12:51 Europe/Berlin] Update query: UPDATE movimientos 
+                          SET concepto_id = :concepto_id, valor = :valor, fecha = :fecha, detalle = :detalle
+                          WHERE id = :movimiento_id
+[01-Dec-2025 07:12:51 Europe/Berlin] Update params: {":movimiento_id":"347",":concepto_id":44,":valor":"1029100.00",":fecha":"2025-11-30",":detalle":"Noviembre."}
+[01-Dec-2025 07:12:51 Europe/Berlin] Update ejecutado, rows affected: 1
+[01-Dec-2025 07:12:51 Europe/Berlin] Actualizando círculos: [1]
+[01-Dec-2025 07:12:52 Europe/Berlin] Update commit exitoso
+[01-Dec-2025 07:12:53 Europe/Berlin] 21. Modelo->update() ejecutado
+[01-Dec-2025 07:12:53 Europe/Berlin] 23. Update exitoso, enviando respuesta...
+[01-Dec-2025 07:12:54 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:12:54 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:12:54 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:12:54 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:13:04 Europe/Berlin] === INICIO UPDATE ===
+[01-Dec-2025 07:13:04 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:13:04 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:13:04 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:13:04 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:13:04 Europe/Berlin] 1. Auth OK - userId: 1
+[01-Dec-2025 07:13:05 Europe/Berlin] 2. Movimiento obtenido
+[01-Dec-2025 07:13:05 Europe/Berlin] 3. Movimiento existe - user_id: 2
+[01-Dec-2025 07:13:05 Europe/Berlin] 4. ¿Es creador? NO
+[01-Dec-2025 07:13:05 Europe/Berlin] 5. No es creador, verificando admin...
+[01-Dec-2025 07:13:05 Europe/Berlin] 6. Círculos: 1
+[01-Dec-2025 07:13:05 Europe/Berlin] 7. ¿Es admin? SI
+[01-Dec-2025 07:13:05 Europe/Berlin] 8. Permiso concedido: Admin del círculo
+[01-Dec-2025 07:13:05 Europe/Berlin] 9. Permisos OK, obteniendo datos del body...
+[01-Dec-2025 07:13:05 Europe/Berlin] 10. Raw body length: 101
+[01-Dec-2025 07:13:05 Europe/Berlin] 11. JSON decoded. Keys: concepto_id, valor, fecha, detalle, circulos_ids
+[01-Dec-2025 07:13:05 Europe/Berlin] 12. Iniciando validaciones...
+[01-Dec-2025 07:13:05 Europe/Berlin] 13. Validando concepto_id: 44
+[01-Dec-2025 07:13:05 Europe/Berlin] 14. Buscando concepto en BD...
+[01-Dec-2025 07:13:06 Europe/Berlin] 15. Concepto encontrado: SI
+[01-Dec-2025 07:13:06 Europe/Berlin] 20. Validaciones OK, llamando a modelo->update()...
+[01-Dec-2025 07:13:06 Europe/Berlin] Update - Movimiento encontrado, procediendo con actualización
+[01-Dec-2025 07:13:06 Europe/Berlin] Update query: UPDATE movimientos 
+                          SET concepto_id = :concepto_id, valor = :valor, fecha = :fecha, detalle = :detalle
+                          WHERE id = :movimiento_id
+[01-Dec-2025 07:13:06 Europe/Berlin] Update params: {":movimiento_id":"347",":concepto_id":44,":valor":"1029100.00",":fecha":"2025-11-30",":detalle":"Noviembre"}
+[01-Dec-2025 07:13:07 Europe/Berlin] Update ejecutado, rows affected: 1
+[01-Dec-2025 07:13:07 Europe/Berlin] Actualizando círculos: [1]
+[01-Dec-2025 07:13:08 Europe/Berlin] Update commit exitoso
+[01-Dec-2025 07:13:08 Europe/Berlin] 21. Modelo->update() ejecutado
+[01-Dec-2025 07:13:08 Europe/Berlin] 23. Update exitoso, enviando respuesta...
+[01-Dec-2025 07:13:09 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:13:09 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:13:09 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:13:09 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:13:53 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:13:53 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:13:53 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:13:53 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:13:54 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:13:54 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:13:54 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:13:54 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:14:04 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:14:04 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:14:04 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:14:04 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:14:06 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:14:06 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:14:06 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:14:06 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:14:10 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:14:10 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:14:10 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:14:10 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:14:11 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:14:11 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:14:11 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:14:11 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:15:01 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:15:01 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:15:01 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:15:01 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:15:02 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:15:02 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:15:02 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:15:02 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:16:01 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:16:01 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:16:01 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:16:01 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:16:02 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:16:02 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:16:02 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:16:02 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:18:52 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:18:52 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:18:52 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:18:52 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:18:54 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:18:54 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:18:54 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:18:54 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:19:00 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:19:00 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:19:00 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:19:00 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:19:04 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:19:04 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:19:04 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:19:04 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:19:05 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:19:05 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:19:05 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:19:05 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:22:12 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:22:12 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:22:12 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:22:12 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:22:13 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:22:13 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:22:13 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:22:13 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:22:36 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:22:36 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:22:36 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:22:36 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:22:37 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method MovimientosController::getSaldoAnterior() in C:\xampp\htdocs\genialisis_wallet_back\index.php:145
 Stack trace:
 #0 {main}
   thrown in C:\xampp\htdocs\genialisis_wallet_back\index.php on line 145
-[01-Dec-2025 05:13:07 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method MovimientosController::getSaldoAnterior() in C:\xampp\htdocs\genialisis_wallet_back\index.php:145
+[01-Dec-2025 07:22:38 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:22:38 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:22:38 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:22:38 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:22:39 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:22:39 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:22:39 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:22:39 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:22:41 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:22:41 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:22:41 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:22:41 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:22:42 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:22:42 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:22:42 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:22:42 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:22:43 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:22:43 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:22:43 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:22:43 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:22:45 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:22:45 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:22:45 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:22:45 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:27:05 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:27:05 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:27:05 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:27:05 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:27:07 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:27:07 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:27:07 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:27:07 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:27:14 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:27:14 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:27:14 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:27:14 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:27:17 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:27:17 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:27:17 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:27:17 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:27:40 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:27:40 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:27:40 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:27:40 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:27:41 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:27:41 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:27:41 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:27:41 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:27:42 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:27:42 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:27:42 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:27:42 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:27:44 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:27:44 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:27:44 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:27:44 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:27:47 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:27:47 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:27:47 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:27:47 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:27:48 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:27:48 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:27:48 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:27:48 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:27:49 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:27:49 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:27:49 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:27:49 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:27:50 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method MovimientosController::getSaldoAnterior() in C:\xampp\htdocs\genialisis_wallet_back\index.php:145
 Stack trace:
 #0 {main}
   thrown in C:\xampp\htdocs\genialisis_wallet_back\index.php on line 145
-[01-Dec-2025 05:22:08 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method MovimientosController::getSaldoAnterior() in C:\xampp\htdocs\genialisis_wallet_back\index.php:145
+[01-Dec-2025 07:27:51 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:27:51 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:27:51 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:27:51 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:27:52 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:27:52 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:27:52 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:27:52 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:27:54 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:27:54 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:27:54 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:27:54 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:27:55 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:27:55 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:27:55 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:27:55 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:27:56 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:27:56 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:27:56 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:27:56 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:27:57 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:27:57 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:27:57 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:27:57 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:27:58 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:27:58 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:27:58 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:27:58 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:28:00 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:28:00 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:28:00 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:28:00 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:35:11 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:35:11 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:35:11 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:35:11 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:35:13 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:35:13 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:35:13 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:35:13 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:35:14 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:35:14 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:35:14 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:35:14 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:35:28 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:35:28 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:35:28 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:35:28 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:35:29 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:35:29 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:35:29 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:35:29 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:35:30 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:35:30 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:35:30 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:35:30 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:35:54 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:35:54 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:35:54 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:35:54 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:35:55 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:35:55 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:35:55 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:35:55 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:35:56 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:35:56 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:35:56 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:35:56 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:35:57 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:35:57 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:35:57 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:35:57 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:36:01 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:36:01 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:36:01 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:36:01 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:36:02 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:36:02 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:36:02 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:36:02 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:36:07 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:36:07 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:36:07 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:36:07 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:36:08 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:36:08 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:36:08 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:36:08 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:36:14 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:36:14 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:36:14 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:36:14 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:36:17 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:36:17 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:36:17 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:36:17 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:36:24 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:36:24 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:36:24 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:36:24 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:36:26 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:36:26 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:36:26 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:36:26 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:36:33 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:36:33 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:36:33 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:36:33 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:36:34 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method MovimientosController::getSaldoAnterior() in C:\xampp\htdocs\genialisis_wallet_back\index.php:145
 Stack trace:
 #0 {main}
   thrown in C:\xampp\htdocs\genialisis_wallet_back\index.php on line 145
-[01-Dec-2025 05:24:07 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method MovimientosController::getSaldoAnterior() in C:\xampp\htdocs\genialisis_wallet_back\index.php:145
+[01-Dec-2025 07:36:35 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:36:35 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:36:35 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:36:35 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:36:36 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:36:36 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:36:36 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:36:36 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:36:37 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:36:37 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:36:37 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:36:37 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:36:38 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:36:38 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:36:38 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:36:38 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:36:40 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:36:40 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:36:40 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:36:40 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:36:41 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:36:41 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:36:41 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:36:41 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:36:49 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:36:49 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:36:49 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:36:49 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:36:51 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:36:51 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:36:51 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:36:51 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:36:59 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:36:59 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:36:59 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:36:59 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:36:59 Europe/Berlin] === DELETE MOVIMIENTO DEBUG ===
+[01-Dec-2025 07:36:59 Europe/Berlin] Movimiento ID: 351
+[01-Dec-2025 07:36:59 Europe/Berlin] User ID del token: 1
+[01-Dec-2025 07:37:00 Europe/Berlin] Movimiento encontrado - creado por user_id: 1
+[01-Dec-2025 07:37:00 Europe/Berlin] ¿Es creador del movimiento? SI
+[01-Dec-2025 07:37:00 Europe/Berlin] ✅ Permiso concedido: Es el creador
+[01-Dec-2025 07:37:00 Europe/Berlin] Delete ejecutado - Rows deleted: 1
+[01-Dec-2025 07:37:00 Europe/Berlin] ✅ Movimiento eliminado exitosamente
+[01-Dec-2025 07:37:01 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:37:01 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:37:01 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:37:01 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:37:07 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:37:07 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:37:07 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:37:07 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:37:08 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:37:08 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:37:08 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:37:08 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:37:10 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:37:10 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:37:10 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:37:10 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:37:11 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method MovimientosController::getSaldoAnterior() in C:\xampp\htdocs\genialisis_wallet_back\index.php:145
 Stack trace:
 #0 {main}
   thrown in C:\xampp\htdocs\genialisis_wallet_back\index.php on line 145
-[01-Dec-2025 05:26:03 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method MovimientosController::getSaldoAnterior() in C:\xampp\htdocs\genialisis_wallet_back\index.php:145
+[01-Dec-2025 07:37:12 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:37:12 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:37:12 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:37:12 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:37:13 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:37:13 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:37:13 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:37:13 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:37:14 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:37:14 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:37:14 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:37:14 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:37:15 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:37:15 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:37:15 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:37:15 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:37:17 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:37:17 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:37:17 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:37:17 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:37:18 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:37:18 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:37:18 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:37:18 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:37:19 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:37:19 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:37:19 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:37:19 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:37:20 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:37:20 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:37:20 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:37:20 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:37:29 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:37:29 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:37:29 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:37:29 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:37:30 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:37:30 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:37:30 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:37:30 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:37:32 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:37:32 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:37:32 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:37:32 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:37:34 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method MovimientosController::getSaldoAnterior() in C:\xampp\htdocs\genialisis_wallet_back\index.php:145
 Stack trace:
 #0 {main}
   thrown in C:\xampp\htdocs\genialisis_wallet_back\index.php on line 145
-[01-Dec-2025 05:30:53 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method MovimientosController::getSaldoAnterior() in C:\xampp\htdocs\genialisis_wallet_back\index.php:145
-Stack trace:
-#0 {main}
-  thrown in C:\xampp\htdocs\genialisis_wallet_back\index.php on line 145
-[01-Dec-2025 05:32:27 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method MovimientosController::getSaldoAnterior() in C:\xampp\htdocs\genialisis_wallet_back\index.php:145
-Stack trace:
-#0 {main}
-  thrown in C:\xampp\htdocs\genialisis_wallet_back\index.php on line 145
+[01-Dec-2025 07:37:34 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:37:34 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:37:34 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:37:34 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:37:36 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:37:36 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:37:36 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:37:36 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:37:37 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:37:37 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:37:37 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:37:37 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:37:38 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:37:38 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:37:38 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:37:38 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:37:39 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:37:39 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:37:39 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:37:39 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1
+[01-Dec-2025 07:37:41 Europe/Berlin] getAuthorizationHeader - Header encontrado: SI
+[01-Dec-2025 07:37:41 Europe/Berlin] getAuthorizationHeader - Valor: Bearer eyJhbGciOiJIUzI1NiIsInR...
+[01-Dec-2025 07:37:41 Europe/Berlin] validateJWT - Token recibido: SI
+[01-Dec-2025 07:37:41 Europe/Berlin] validateJWT - ✅ Token válido - user_id: 1

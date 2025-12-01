@@ -1,7 +1,51 @@
-2025-12-01 05:05:32 - CONEXIÓN INFO
+2025-12-01 05:47:50 - CONEXIÓN INFO
 Base de datos activa: genialisis-wallet-prod
 ---
-2025-12-01 05:05:32 - authenticate() called
+2025-12-01 05:47:51 - authenticate() called
+Email buscado: mariarestrepo77@gmail.com
+Rows retornadas: 1
+User found: YES
+User ID: 1, Email en BD: mariarestrepo77@gmail.com
+---
+Password verify: TRUE
+=============================
+2025-12-01 06:01:11 - CONEXIÓN INFO
+Base de datos activa: genialisis-wallet-prod
+---
+2025-12-01 06:01:11 - authenticate() called
+Email buscado: mariarestrepo77@gmail.com
+Rows retornadas: 1
+User found: YES
+User ID: 1, Email en BD: mariarestrepo77@gmail.com
+---
+Password verify: TRUE
+=============================
+2025-12-01 06:16:03 - CONEXIÓN INFO
+Base de datos activa: genialisis-wallet-prod
+---
+2025-12-01 06:16:04 - authenticate() called
+Email buscado: mariarestrepo77@gmail.com
+Rows retornadas: 1
+User found: YES
+User ID: 1, Email en BD: mariarestrepo77@gmail.com
+---
+Password verify: TRUE
+=============================
+2025-12-01 07:27:38 - CONEXIÓN INFO
+Base de datos activa: genialisis-wallet-prod
+---
+2025-12-01 07:27:39 - authenticate() called
+Email buscado: mariarestrepo77@gmail.com
+Rows retornadas: 1
+User found: YES
+User ID: 1, Email en BD: mariarestrepo77@gmail.com
+---
+Password verify: TRUE
+=============================
+2025-12-01 07:35:52 - CONEXIÓN INFO
+Base de datos activa: genialisis-wallet-prod
+---
+2025-12-01 07:35:52 - authenticate() called
 Email buscado: mariarestrepo77@gmail.com
 Rows retornadas: 1
 User found: YES

@@ -555,10 +555,12 @@ class Movimiento
         }
     }
     /**
-     * Actualizar movimiento existente
+     * Actualizar movimiento
+     * NOTA: Los permisos se validan en el CONTROLLER (creador o admin)
+     * Este método solo ejecuta el update
      * 
      * @param int $movimientoId ID del movimiento a actualizar
-     * @param int $userId Usuario que actualiza (para validar permisos)
+     * @param int $userId ID del usuario que hace la actualización (ya validado en controller)
      * @param int $conceptoId Nuevo concepto (opcional)
      * @param float $valor Nuevo valor (opcional)
      * @param string $fecha Nueva fecha (opcional)
@@ -572,17 +574,21 @@ class Movimiento
         try {
             $this->conn->beginTransaction();
 
-            // Verificar que el movimiento existe y pertenece al usuario
+            // Solo verificar que el movimiento existe
+            // NO validar user_id porque el controller ya validó permisos (creador o admin)
             $movimientoActual = $this->getById($movimientoId);
 
-            if (!$movimientoActual || $movimientoActual['user_id'] != $userId) {
+            if (!$movimientoActual) {
+                error_log("Error en update: Movimiento no encontrado - ID: " . $movimientoId);
                 $this->conn->rollBack();
                 return null;
             }
 
+            error_log("Update - Movimiento encontrado, procediendo con actualización");
+
             // Construir query dinámico según campos a actualizar
             $campos = [];
-            $params = [':movimiento_id' => $movimientoId, ':user_id' => $userId];
+            $params = [':movimiento_id' => $movimientoId];
 
             if ($conceptoId !== null) {
                 $campos[] = "concepto_id = :concepto_id";
@@ -611,10 +617,14 @@ class Movimiento
 
             // Solo actualizar si hay campos para actualizar
             if (!empty($campos)) {
+                // IMPORTANTE: NO validar user_id en el WHERE
+                // Los permisos ya fueron validados en el controller
                 $query = "UPDATE movimientos 
                           SET " . implode(", ", $campos) . "
-                          WHERE id = :movimiento_id 
-                            AND user_id = :user_id";
+                          WHERE id = :movimiento_id";
+
+                error_log("Update query: " . $query);
+                error_log("Update params: " . json_encode($params));
 
                 $stmt = $this->conn->prepare($query);
 
@@ -623,10 +633,13 @@ class Movimiento
                 }
 
                 $stmt->execute();
+                error_log("Update ejecutado, rows affected: " . $stmt->rowCount());
             }
 
             // Actualizar círculos si se proporcionaron
             if ($circulosIds !== null && is_array($circulosIds)) {
+                error_log("Actualizando círculos: " . json_encode($circulosIds));
+
                 // Eliminar círculos actuales
                 $deleteQuery = "DELETE FROM movimientos_circulos WHERE movimiento_id = :mov_id";
                 $deleteStmt = $this->conn->prepare($deleteQuery);
@@ -647,42 +660,47 @@ class Movimiento
             }
 
             $this->conn->commit();
+            error_log("Update commit exitoso");
 
             // Retornar movimiento actualizado
             return $this->getById($movimientoId);
         } catch (PDOException $e) {
             $this->conn->rollBack();
             error_log("Error en update: " . $e->getMessage());
+            error_log("Stack trace: " . $e->getTraceAsString());
             return null;
         }
     }
-
     /**
      * Eliminar movimiento
+     * NOTA: Los permisos se validan en el CONTROLLER (creador o admin)
+     * Este método solo ejecuta el delete
      * 
      * @param int $movimientoId ID del movimiento
-     * @param int $userId ID del usuario (para validar permisos)
+     * @param int $userId ID del usuario (ya validado en controller)
      * @return bool True si se eliminó correctamente
      */
     public function delete($movimientoId, $userId)
     {
         try {
+            // NO validar user_id porque el controller ya validó permisos (creador o admin)
             $query = "DELETE FROM movimientos 
-                      WHERE id = :movimiento_id 
-                        AND user_id = :user_id";
+                      WHERE id = :movimiento_id";
 
             $stmt = $this->conn->prepare($query);
             $stmt->bindParam(':movimiento_id', $movimientoId, PDO::PARAM_INT);
-            $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
             $stmt->execute();
 
-            return $stmt->rowCount() > 0;
+            $rowsDeleted = $stmt->rowCount();
+            error_log("Delete ejecutado - Rows deleted: " . $rowsDeleted);
+
+            return $rowsDeleted > 0;
         } catch (PDOException $e) {
             error_log("Error en delete: " . $e->getMessage());
+            error_log("Stack trace: " . $e->getTraceAsString());
             return false;
         }
     }
-
     /**
      * Formatear movimiento (convertir tipos)
      */
@@ -820,6 +838,49 @@ class Movimiento
         } catch (PDOException $e) {
             error_log("Error en getPeriodosDisponibles: " . $e->getMessage());
             return [];
+        }
+    }
+
+    /**
+     * Verificar si el usuario es admin de alguno de los círculos especificados
+     * 
+     * @param int $userId ID del usuario
+     * @param array $circulosIds Array de IDs de círculos
+     * @return bool True si es admin de al menos uno
+     */
+    public function esAdminDeCirculos($userId, $circulosIds)
+    {
+        try {
+            if (empty($circulosIds)) {
+                return false;
+            }
+
+            // Limpiar y convertir a enteros
+            $circulosIds = array_map('intval', $circulosIds);
+
+            // Crear placeholders para la consulta IN
+            $placeholders = str_repeat('?,', count($circulosIds) - 1) . '?';
+
+            $query = "SELECT COUNT(*) as count
+                      FROM usuarios_circulos 
+                      WHERE user_id = ? 
+                        AND circulo_id IN ($placeholders)
+                        AND es_admin = 1";
+
+            $stmt = $this->conn->prepare($query);
+
+            // Bind del user_id primero
+            $params = [$userId];
+            // Luego los círculos
+            $params = array_merge($params, $circulosIds);
+
+            $stmt->execute($params);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $result['count'] > 0;
+        } catch (PDOException $e) {
+            error_log("Error en esAdminDeCirculos: " . $e->getMessage());
+            return false;
         }
     }
 }

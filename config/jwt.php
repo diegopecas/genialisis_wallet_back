@@ -51,13 +51,18 @@ function generateJWT($payload) {
  * @return array|null Payload decodificado o null si es inválido
  */
 function validateJWT($token) {
+    // LOG DE DEBUG
+    error_log("validateJWT - Token recibido: " . ($token ? "SI" : "NO"));
+    
     if (!$token) {
+        error_log("validateJWT - ERROR: Token vacío");
         return null;
     }
     
     $tokenParts = explode('.', $token);
     
     if (count($tokenParts) !== 3) {
+        error_log("validateJWT - ERROR: Token no tiene 3 partes (tiene " . count($tokenParts) . ")");
         return null;
     }
     
@@ -68,6 +73,7 @@ function validateJWT($token) {
     $base64UrlSignatureCheck = base64UrlEncode($signature);
     
     if ($base64UrlSignature !== $base64UrlSignatureCheck) {
+        error_log("validateJWT - ERROR: Firma inválida");
         return null;
     }
     
@@ -76,8 +82,11 @@ function validateJWT($token) {
     
     // Verificar expiración
     if (isset($payload['exp']) && $payload['exp'] < time()) {
+        error_log("validateJWT - ERROR: Token expirado");
         return null;
     }
+    
+    error_log("validateJWT - ✅ Token válido - user_id: " . ($payload['user_id'] ?? 'N/A'));
     
     return $payload;
 }
@@ -113,21 +122,44 @@ function getBearerToken() {
 
 /**
  * Obtener header de autorización
+ * MEJORADO: Funciona correctamente con PUT, PATCH, DELETE
  */
 function getAuthorizationHeader() {
     $headers = null;
     
+    // Método 1: $_SERVER['Authorization'] (menos común)
     if (isset($_SERVER['Authorization'])) {
         $headers = trim($_SERVER["Authorization"]);
-    } else if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
+    }
+    // Método 2: $_SERVER['HTTP_AUTHORIZATION'] (más común en Apache con mod_rewrite)
+    else if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
         $headers = trim($_SERVER["HTTP_AUTHORIZATION"]);
-    } elseif (function_exists('apache_request_headers')) {
+    }
+    // Método 3: Usar getallheaders() si está disponible (mejor para todos los métodos HTTP)
+    else if (function_exists('getallheaders')) {
+        $allHeaders = getallheaders();
+        // Buscar header Authorization (case-insensitive)
+        foreach ($allHeaders as $name => $value) {
+            if (strtolower($name) === 'authorization') {
+                $headers = trim($value);
+                break;
+            }
+        }
+    }
+    // Método 4: apache_request_headers() como fallback
+    else if (function_exists('apache_request_headers')) {
         $requestHeaders = apache_request_headers();
         $requestHeaders = array_combine(array_map('ucwords', array_keys($requestHeaders)), array_values($requestHeaders));
         
         if (isset($requestHeaders['Authorization'])) {
             $headers = trim($requestHeaders['Authorization']);
         }
+    }
+    
+    // LOG DE DEBUG (comentar en producción)
+    error_log("getAuthorizationHeader - Header encontrado: " . ($headers ? "SI" : "NO"));
+    if ($headers) {
+        error_log("getAuthorizationHeader - Valor: " . substr($headers, 0, 30) . "...");
     }
     
     return $headers;

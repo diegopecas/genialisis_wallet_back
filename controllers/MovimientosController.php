@@ -155,10 +155,57 @@ class MovimientosController
 
         Response::success($movimiento, 'Movimiento obtenido correctamente');
     }
+    /**
+     * Verificar si el usuario es admin de alguno de los círculos especificados
+     * 
+     * @param int $userId ID del usuario
+     * @param array $circulosIds Array de IDs de círculos
+     * @return bool True si es admin de al menos uno
+     */
+    public function esAdminDeCirculos($userId, $circulosIds)
+    {
+        try {
+            if (empty($circulosIds)) {
+                return false;
+            }
+
+            // Limpiar y convertir a enteros
+            $circulosIds = array_map('intval', $circulosIds);
+
+            // Crear placeholders para la consulta IN
+            $placeholders = str_repeat('?,', count($circulosIds) - 1) . '?';
+
+            $query = "SELECT COUNT(*) as count
+                      FROM usuarios_circulos 
+                      WHERE user_id = ? 
+                        AND circulo_id IN ($placeholders)
+                        AND es_admin = 1";
+
+            $stmt = $this->conn->prepare($query);
+
+            // Bind del user_id primero
+            $params = [$userId];
+            // Luego los círculos
+            $params = array_merge($params, $circulosIds);
+
+            $stmt->execute($params);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $result['count'] > 0;
+        } catch (PDOException $e) {
+            error_log("Error en esAdminDeCirculos: " . $e->getMessage());
+            return false;
+        }
+    }
 
     /**
      * Actualizar movimiento existente
      * PUT/PATCH /movimientos/{id}
+     * 
+     * Puede editar si:
+     * 1. Es el creador del movimiento (user_id)
+     * 2. Es ADMIN de algún círculo asociado al movimiento
+     * 
      * Body: {
      *   "concepto_id": 1, (opcional)
      *   "valor": 50000, (opcional)
@@ -170,39 +217,78 @@ class MovimientosController
      */
     public function update($id)
     {
+        error_log("=== INICIO UPDATE ===");
+
         $payload = $this->validateAuth();
         $userId = $payload['user_id'];
+        error_log("1. Auth OK - userId: " . $userId);
 
         // Verificar que el movimiento existe
         $movimiento = $this->movimientoModel->getById($id);
+        error_log("2. Movimiento obtenido");
 
         if (!$movimiento) {
+            error_log("ERROR: Movimiento no encontrado");
             Response::notFound('Movimiento no encontrado');
         }
 
-        // Validar que el movimiento pertenece al usuario
-        if ($movimiento['user_id'] != $userId) {
-            Response::unauthorized('No tienes permiso para actualizar este movimiento');
+        error_log("3. Movimiento existe - user_id: " . $movimiento['user_id']);
+
+        // VALIDACIÓN DE PERMISOS
+        $esCreador = ($movimiento['user_id'] == $userId);
+        error_log("4. ¿Es creador? " . ($esCreador ? 'SI' : 'NO'));
+
+        if ($esCreador) {
+            error_log("5. Permiso: Es creador");
+        } else {
+            error_log("5. No es creador, verificando admin...");
+            $circulosMovimiento = explode(',', $movimiento['circulos_ids']);
+            error_log("6. Círculos: " . implode(', ', $circulosMovimiento));
+
+            $esAdminDeAlgunCirculo = $this->movimientoModel->esAdminDeCirculos($userId, $circulosMovimiento);
+            error_log("7. ¿Es admin? " . ($esAdminDeAlgunCirculo ? 'SI' : 'NO'));
+
+            if (!$esAdminDeAlgunCirculo) {
+                error_log("ERROR: Sin permisos");
+                Response::unauthorized('No tienes permiso para actualizar este movimiento');
+            }
+
+            error_log("8. Permiso concedido: Admin del círculo");
         }
 
-        // Obtener datos del body
-        $data = json_decode(file_get_contents('php://input'), true);
+        error_log("9. Permisos OK, obteniendo datos del body...");
 
-        // Validaciones (solo para campos que vienen en el request)
+        // Obtener datos del body
+        $rawBody = file_get_contents('php://input');
+        error_log("10. Raw body length: " . strlen($rawBody));
+
+        $data = json_decode($rawBody, true);
+        error_log("11. JSON decoded. Keys: " . implode(', ', array_keys($data ?? [])));
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            error_log("ERROR: JSON inválido - " . json_last_error_msg());
+            Response::validationError('JSON inválido');
+        }
+
+        error_log("12. Iniciando validaciones...");
+
+        // Validaciones
         $errors = [];
 
         if (isset($data['concepto_id'])) {
+            error_log("13. Validando concepto_id: " . $data['concepto_id']);
+
             if (empty($data['concepto_id'])) {
                 $errors['concepto_id'] = 'Concepto es requerido';
             } else {
-                // Validar que el concepto existe
+                error_log("14. Buscando concepto en BD...");
                 $concepto = $this->conceptoModel->getById($data['concepto_id']);
+                error_log("15. Concepto encontrado: " . ($concepto ? 'SI' : 'NO'));
+
                 if (!$concepto) {
                     $errors['concepto_id'] = 'Concepto no encontrado';
-                }
-
-                // Validar detalle si el concepto lo requiere
-                if ($concepto && $concepto['requiere_detalle']) {
+                } else if ($concepto['requiere_detalle']) {
+                    error_log("16. Concepto requiere detalle");
                     $detalleActualizado = $data['detalle'] ?? $movimiento['detalle'];
                     if (empty($detalleActualizado)) {
                         $errors['detalle'] = 'Este concepto requiere detalle';
@@ -212,65 +298,114 @@ class MovimientosController
         }
 
         if (isset($data['valor']) && $data['valor'] <= 0) {
+            error_log("17. ERROR: Valor inválido");
             $errors['valor'] = 'Valor debe ser mayor a 0';
         }
 
         if (isset($data['fecha']) && empty($data['fecha'])) {
+            error_log("18. ERROR: Fecha vacía");
             $errors['fecha'] = 'Fecha es requerida';
         }
 
         if (!empty($errors)) {
+            error_log("19. Errores de validación: " . json_encode($errors));
             Response::validationError('Errores de validación', $errors);
         }
 
+        error_log("20. Validaciones OK, llamando a modelo->update()...");
+
         // Actualizar movimiento
-        $movimientoActualizado = $this->movimientoModel->update(
-            $id,
-            $userId,
-            $data['concepto_id'] ?? null,
-            $data['valor'] ?? null,
-            $data['fecha'] ?? null,
-            $data['detalle'] ?? null,
-            $data['notas'] ?? null,
-            $data['circulos_ids'] ?? null
-        );
+        try {
+            $movimientoActualizado = $this->movimientoModel->update(
+                $id,
+                $userId,
+                $data['concepto_id'] ?? null,
+                $data['valor'] ?? null,
+                $data['fecha'] ?? null,
+                $data['detalle'] ?? null,
+                $data['notas'] ?? null,
+                $data['circulos_ids'] ?? null
+            );
+
+            error_log("21. Modelo->update() ejecutado");
+        } catch (Exception $e) {
+            error_log("ERROR en modelo->update(): " . $e->getMessage());
+            error_log("Stack trace: " . $e->getTraceAsString());
+            Response::serverError('Error al actualizar: ' . $e->getMessage());
+        }
 
         if (!$movimientoActualizado) {
+            error_log("22. ERROR: modelo->update() retornó NULL o FALSE");
             Response::serverError('Error al actualizar el movimiento');
         }
 
+        error_log("23. Update exitoso, enviando respuesta...");
         Response::success($movimientoActualizado, 'Movimiento actualizado exitosamente');
+        error_log("24. === FIN UPDATE ===");
     }
 
     /**
      * Eliminar movimiento
      * DELETE /movimientos/{id}
+     * 
+     * Puede eliminar si:
+     * 1. Es el creador del movimiento (user_id)
+     * 2. Es ADMIN de algún círculo asociado al movimiento
      */
     public function delete($id)
     {
         $payload = $this->validateAuth();
         $userId = $payload['user_id'];
 
-        // Verificar que el movimiento existe y pertenece al usuario
+        // LOG DE DEBUG
+        error_log("=== DELETE MOVIMIENTO DEBUG ===");
+        error_log("Movimiento ID: " . $id);
+        error_log("User ID del token: " . $userId);
+
+        // Verificar que el movimiento existe
         $movimiento = $this->movimientoModel->getById($id);
 
         if (!$movimiento) {
+            error_log("ERROR: Movimiento no encontrado");
             Response::notFound('Movimiento no encontrado');
         }
 
-        if ($movimiento['user_id'] != $userId) {
-            Response::unauthorized('No tienes permiso para eliminar este movimiento');
+        error_log("Movimiento encontrado - creado por user_id: " . $movimiento['user_id']);
+
+        // VALIDACIÓN DE PERMISOS MEJORADA
+        $esCreador = ($movimiento['user_id'] == $userId);
+        error_log("¿Es creador del movimiento? " . ($esCreador ? 'SI' : 'NO'));
+
+        if ($esCreador) {
+            error_log("✅ Permiso concedido: Es el creador");
+        } else {
+            // Verificar si es admin de algún círculo del movimiento
+            $circulosMovimiento = explode(',', $movimiento['circulos_ids']);
+            error_log("Círculos del movimiento: " . implode(', ', $circulosMovimiento));
+
+            $esAdminDeAlgunCirculo = $this->movimientoModel->esAdminDeCirculos($userId, $circulosMovimiento);
+            error_log("¿Es admin de algún círculo? " . ($esAdminDeAlgunCirculo ? 'SI' : 'NO'));
+
+            if (!$esAdminDeAlgunCirculo) {
+                error_log("❌ PERMISO DENEGADO: No es creador ni admin del círculo");
+                Response::unauthorized('No tienes permiso para eliminar este movimiento');
+            }
+
+            error_log("✅ Permiso concedido: Es admin del círculo");
         }
 
         // Eliminar
         $deleted = $this->movimientoModel->delete($id, $userId);
 
         if (!$deleted) {
+            error_log("ERROR: No se pudo eliminar el movimiento");
             Response::serverError('Error al eliminar el movimiento');
         }
 
+        error_log("✅ Movimiento eliminado exitosamente");
         Response::success(null, 'Movimiento eliminado exitosamente');
     }
+
 
     /**
      * Obtener balance (totales)
