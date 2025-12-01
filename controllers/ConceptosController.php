@@ -1,6 +1,6 @@
 <?php
 /**
- * ConceptosController
+ * ConceptosController - ACTUALIZADO para soportar tipo_mov_id = 3 (Traslado)
  * Manejo de conceptos y categorías
  */
 
@@ -17,7 +17,7 @@ class ConceptosController {
     
     /**
      * Obtener conceptos agrupados por categoría
-     * GET /conceptos?circulo_id={id}&tipo_mov_id={1|2}
+     * GET /conceptos?circulo_id={id}&tipo_mov_id={1|2|3}
      * Header: Authorization: Bearer {token}
      */
     public function getConceptos() {
@@ -33,8 +33,8 @@ class ConceptosController {
             Response::validationError('circulo_id es requerido');
         }
         
-        if (!$tipoMovId || !in_array($tipoMovId, [1, 2])) {
-            Response::validationError('tipo_mov_id debe ser 1 (Ingreso) o 2 (Gasto)');
+        if (!$tipoMovId || !in_array($tipoMovId, [1, 2, 3])) {
+            Response::validationError('tipo_mov_id debe ser 1 (Ingreso), 2 (Gasto) o 3 (Traslado)');
         }
         
         // Obtener conceptos

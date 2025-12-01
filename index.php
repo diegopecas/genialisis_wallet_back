@@ -2,16 +2,15 @@
 
 /**
  * Circle Finance API - Router Principal
- * Backend PHP con API REST
+ * ACTUALIZADO: Incluye rutas para Cuentas
  */
 
 // Headers CORS
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
 header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization");
-header('Access-Control-Max-Age: 86400'); // 24 horas
+header('Access-Control-Max-Age: 86400');
 
-// Responder a preflight requests (OPTIONS)
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit;
@@ -27,20 +26,18 @@ ini_set('error_log', __DIR__ . '/error.log');
 require_once __DIR__ . '/controllers/AuthController.php';
 require_once __DIR__ . '/controllers/ConceptosController.php';
 require_once __DIR__ . '/controllers/MovimientosController.php';
+require_once __DIR__ . '/controllers/CuentasController.php';
 require_once __DIR__ . '/utils/Response.php';
 
 // Obtener método HTTP y URI
 $method = $_SERVER['REQUEST_METHOD'];
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-// Remover el prefijo de la ruta si existe (ajustar según tu configuración)
-// Ejemplo: si tu API está en /circle-finance-backend/index.php
 $basePath = dirname($_SERVER['SCRIPT_NAME']);
 if ($basePath !== '/') {
     $uri = str_replace($basePath, '', $uri);
 }
 
-// Limpiar URI
 $uri = trim($uri, '/');
 $uriParts = explode('/', $uri);
 
@@ -87,6 +84,61 @@ try {
     }
 
     // ============================================================
+    // RUTAS DE CUENTAS (NUEVO)
+    // ============================================================
+
+    if ($uriParts[0] === 'cuentas') {
+        $cuentasController = new CuentasController();
+
+        // GET /cuentas/resumen
+        if (
+            $method === 'GET' && isset($uriParts[1]) && $uriParts[1] === 'resumen'
+        ) {
+            $cuentasController->getResumen();
+            exit;
+        }
+
+        // GET /cuentas/{id}/saldo
+        if (
+            $method === 'GET' && isset($uriParts[1]) && is_numeric($uriParts[1])
+            && isset($uriParts[2]) && $uriParts[2] === 'saldo'
+        ) {
+            $cuentasController->getSaldo($uriParts[1]);
+            exit;
+        }
+
+        // GET /cuentas/{id}
+        if ($method === 'GET' && isset($uriParts[1]) && is_numeric($uriParts[1])) {
+            $cuentasController->getById($uriParts[1]);
+            exit;
+        }
+
+        // GET /cuentas
+        if ($method === 'GET') {
+            $cuentasController->getCuentas();
+            exit;
+        }
+
+        // POST /cuentas
+        if ($method === 'POST') {
+            $cuentasController->create();
+            exit;
+        }
+
+        // PUT/PATCH /cuentas/{id}
+        if (($method === 'PUT' || $method === 'PATCH') && isset($uriParts[1]) && is_numeric($uriParts[1])) {
+            $cuentasController->update($uriParts[1]);
+            exit;
+        }
+
+        // DELETE /cuentas/{id}
+        if ($method === 'DELETE' && isset($uriParts[1]) && is_numeric($uriParts[1])) {
+            $cuentasController->delete($uriParts[1]);
+            exit;
+        }
+    }
+
+    // ============================================================
     // RUTAS DE MOVIMIENTOS
     // ============================================================
 
@@ -101,6 +153,7 @@ try {
             $movimientosController->getBalanceDetallado();
             exit;
         }
+
         // GET /movimientos/totales/categoria
         if (
             $method === 'GET' && isset($uriParts[1]) && $uriParts[1] === 'totales'
@@ -118,11 +171,13 @@ try {
             $movimientosController->getTotalesPorDia();
             exit;
         }
+
         // GET /movimientos/balance
         if ($method === 'GET' && isset($uriParts[1]) && $uriParts[1] === 'balance') {
             $movimientosController->getBalance();
             exit;
         }
+
         // GET /movimientos/grafico/categoria
         if (
             $method === 'GET' && isset($uriParts[1]) && $uriParts[1] === 'grafico'
@@ -131,6 +186,7 @@ try {
             $movimientosController->getGraficoCategoria();
             exit;
         }
+
         // GET /movimientos/evolucion
         if ($method === 'GET' && isset($uriParts[1]) && $uriParts[1] === 'evolucion') {
             $movimientosController->getEvolucion();

@@ -1,8 +1,9 @@
 <?php
 
 /**
- * MovimientosController
+ * MovimientosController - ACTUALIZADO CON SISTEMA DE CUENTAS
  * Manejo de movimientos financieros (CRUD y consultas)
+ * Soporta: Ingresos, Gastos y Traslados entre cuentas
  */
 
 require_once __DIR__ . '/../models/Movimiento.php';
@@ -24,12 +25,39 @@ class MovimientosController
     /**
      * Crear nuevo movimiento
      * POST /movimientos
-     * Body: {
+     * 
+     * ACTUALIZADO: Ahora soporta cuentas
+     * 
+     * Body para INGRESO (tipo_mov_id=1):
+     * {
      *   "concepto_id": 1,
      *   "valor": 50000,
      *   "fecha": "2025-11-01",
      *   "circulos_ids": [1],
+     *   "cuenta_id": 1,          // REQUERIDO para ingreso
      *   "detalle": "...",
+     *   "notas": "..."
+     * }
+     * 
+     * Body para GASTO (tipo_mov_id=2):
+     * {
+     *   "concepto_id": 15,
+     *   "valor": 50000,
+     *   "fecha": "2025-11-01",
+     *   "circulos_ids": [1],
+     *   "cuenta_id": 2,          // REQUERIDO para gasto
+     *   "detalle": "...",
+     *   "notas": "..."
+     * }
+     * 
+     * Body para TRASLADO (tipo_mov_id=3):
+     * {
+     *   "concepto_id": 50,
+     *   "valor": 100000,
+     *   "fecha": "2025-11-01",
+     *   "circulos_ids": [1],
+     *   "cuenta_origen_id": 1,   // REQUERIDO para traslado
+     *   "cuenta_destino_id": 2,  // REQUERIDO para traslado
      *   "notas": "..."
      * }
      */
@@ -78,7 +106,54 @@ class MovimientosController
             ]);
         }
 
-        // Crear movimiento
+        // === VALIDACIONES DE CUENTAS SEGÚN TIPO DE MOVIMIENTO ===
+        $tipoMovId = $concepto['tipo_mov_id'];
+
+        if ($tipoMovId == 1 || $tipoMovId == 2) {
+            // INGRESO o GASTO: requiere cuenta_id
+            if (empty($data['cuenta_id'])) {
+                Response::validationError('Cuenta es requerida para ' . ($tipoMovId == 1 ? 'ingresos' : 'gastos'), [
+                    'cuenta_id' => 'Debe seleccionar una cuenta'
+                ]);
+            }
+
+            // Validar que NO vengan cuenta_origen_id ni cuenta_destino_id
+            if (!empty($data['cuenta_origen_id']) || !empty($data['cuenta_destino_id'])) {
+                Response::validationError('Ingreso/Gasto solo debe tener cuenta_id', [
+                    'cuenta_origen_id' => 'No debe enviarse para ingreso/gasto',
+                    'cuenta_destino_id' => 'No debe enviarse para ingreso/gasto'
+                ]);
+            }
+        } elseif ($tipoMovId == 3) {
+            // TRASLADO: requiere cuenta_origen_id y cuenta_destino_id
+            if (empty($data['cuenta_origen_id'])) {
+                $errors['cuenta_origen_id'] = 'Cuenta origen es requerida para traslados';
+            }
+
+            if (empty($data['cuenta_destino_id'])) {
+                $errors['cuenta_destino_id'] = 'Cuenta destino es requerida para traslados';
+            }
+
+            if (!empty($errors)) {
+                Response::validationError('Errores de validación', $errors);
+            }
+
+            // Validar que cuenta origen y destino sean diferentes
+            if ($data['cuenta_origen_id'] == $data['cuenta_destino_id']) {
+                Response::validationError('Las cuentas de origen y destino deben ser diferentes', [
+                    'cuenta_destino_id' => 'Debe seleccionar una cuenta diferente'
+                ]);
+            }
+
+            // Validar que NO venga cuenta_id
+            if (!empty($data['cuenta_id'])) {
+                Response::validationError('Traslado no debe tener cuenta_id', [
+                    'cuenta_id' => 'No debe enviarse para traslados'
+                ]);
+            }
+        }
+
+        // Crear movimiento con cuentas
         $movimiento = $this->movimientoModel->create(
             $userId,
             $data['concepto_id'],
@@ -86,7 +161,10 @@ class MovimientosController
             $data['fecha'],
             $data['circulos_ids'],
             $data['detalle'] ?? null,
-            $data['notas'] ?? null
+            $data['notas'] ?? null,
+            $data['cuenta_id'] ?? null,
+            $data['cuenta_origen_id'] ?? null,
+            $data['cuenta_destino_id'] ?? null
         );
 
         if (!$movimiento) {
@@ -98,7 +176,7 @@ class MovimientosController
 
     /**
      * Obtener movimientos con filtros
-     * GET /movimientos?tipo_mov_id={1|2}&circulo_id={id}&anio={2025}&mes={11}&limit={10}
+     * GET /movimientos?tipo_mov_id={1|2|3}&circulo_id={id}&anio={2025}&mes={11}&limit={10}
      * Si limit=0 o no se especifica limit, trae todos los movimientos
      */
     public function getMovimientos()
@@ -202,6 +280,8 @@ class MovimientosController
      * Actualizar movimiento existente
      * PUT/PATCH /movimientos/{id}
      * 
+     * ACTUALIZADO: Ahora permite actualizar cuentas
+     * 
      * Puede editar si:
      * 1. Es el creador del movimiento (user_id)
      * 2. Es ADMIN de algún círculo asociado al movimiento
@@ -212,7 +292,10 @@ class MovimientosController
      *   "fecha": "2025-11-01", (opcional)
      *   "detalle": "...", (opcional)
      *   "notas": "...", (opcional)
-     *   "circulos_ids": [1] (opcional)
+     *   "circulos_ids": [1], (opcional)
+     *   "cuenta_id": 2, (opcional - para ingreso/gasto)
+     *   "cuenta_origen_id": 1, (opcional - para traslado)
+     *   "cuenta_destino_id": 3 (opcional - para traslado)
      * }
      */
     public function update($id)
@@ -239,109 +322,122 @@ class MovimientosController
         error_log("4. ¿Es creador? " . ($esCreador ? 'SI' : 'NO'));
 
         if ($esCreador) {
-            error_log("5. Permiso: Es creador");
+            error_log("5. ✅ Permiso concedido: Es el creador");
         } else {
-            error_log("5. No es creador, verificando admin...");
+            // Verificar si es admin de algún círculo del movimiento
             $circulosMovimiento = explode(',', $movimiento['circulos_ids']);
-            error_log("6. Círculos: " . implode(', ', $circulosMovimiento));
+            error_log("6. Verificando admin en círculos: " . implode(', ', $circulosMovimiento));
 
             $esAdminDeAlgunCirculo = $this->movimientoModel->esAdminDeCirculos($userId, $circulosMovimiento);
-            error_log("7. ¿Es admin? " . ($esAdminDeAlgunCirculo ? 'SI' : 'NO'));
+            error_log("7. ¿Es admin de algún círculo? " . ($esAdminDeAlgunCirculo ? 'SI' : 'NO'));
 
             if (!$esAdminDeAlgunCirculo) {
-                error_log("ERROR: Sin permisos");
-                Response::unauthorized('No tienes permiso para actualizar este movimiento');
+                error_log("8. ❌ PERMISO DENEGADO: No es creador ni admin");
+                Response::unauthorized('No tienes permiso para editar este movimiento');
             }
 
-            error_log("8. Permiso concedido: Admin del círculo");
+            error_log("9. ✅ Permiso concedido: Es admin del círculo");
         }
-
-        error_log("9. Permisos OK, obteniendo datos del body...");
 
         // Obtener datos del body
-        $rawBody = file_get_contents('php://input');
-        error_log("10. Raw body length: " . strlen($rawBody));
+        $data = json_decode(file_get_contents('php://input'), true);
+        error_log("10. Datos recibidos: " . json_encode($data));
 
-        $data = json_decode($rawBody, true);
-        error_log("11. JSON decoded. Keys: " . implode(', ', array_keys($data ?? [])));
-
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            error_log("ERROR: JSON inválido - " . json_last_error_msg());
-            Response::validationError('JSON inválido');
-        }
-
-        error_log("12. Iniciando validaciones...");
-
-        // Validaciones
-        $errors = [];
-
+        // Validar concepto si se envía
         if (isset($data['concepto_id'])) {
-            error_log("13. Validando concepto_id: " . $data['concepto_id']);
+            error_log("11. Validando concepto_id: " . $data['concepto_id']);
+            $concepto = $this->conceptoModel->getById($data['concepto_id']);
 
-            if (empty($data['concepto_id'])) {
-                $errors['concepto_id'] = 'Concepto es requerido';
-            } else {
-                error_log("14. Buscando concepto en BD...");
-                $concepto = $this->conceptoModel->getById($data['concepto_id']);
-                error_log("15. Concepto encontrado: " . ($concepto ? 'SI' : 'NO'));
+            if (!$concepto) {
+                error_log("12. ERROR: Concepto no encontrado");
+                Response::validationError('Concepto no encontrado');
+            }
 
-                if (!$concepto) {
-                    $errors['concepto_id'] = 'Concepto no encontrado';
-                } else if ($concepto['requiere_detalle']) {
-                    error_log("16. Concepto requiere detalle");
-                    $detalleActualizado = $data['detalle'] ?? $movimiento['detalle'];
-                    if (empty($detalleActualizado)) {
-                        $errors['detalle'] = 'Este concepto requiere detalle';
+            error_log("13. Concepto válido");
+
+            // Validar detalle si el concepto lo requiere
+            if ($concepto['requiere_detalle']) {
+                if (isset($data['detalle']) && empty($data['detalle'])) {
+                    error_log("14. ERROR: Detalle requerido pero vacío");
+                    Response::validationError('Este concepto requiere detalle', [
+                        'detalle' => 'Detalle es requerido para este concepto'
+                    ]);
+                }
+                error_log("15. Detalle OK");
+            }
+
+            // === VALIDACIONES DE CUENTAS SI SE CAMBIA EL CONCEPTO ===
+            $tipoMovId = $concepto['tipo_mov_id'];
+
+            if ($tipoMovId == 1 || $tipoMovId == 2) {
+                // INGRESO o GASTO
+                if (isset($data['cuenta_id']) && empty($data['cuenta_id'])) {
+                    Response::validationError('Cuenta es requerida para ' . ($tipoMovId == 1 ? 'ingresos' : 'gastos'));
+                }
+
+                // Si se envían cuenta_origen_id o cuenta_destino_id, es error
+                if (isset($data['cuenta_origen_id']) || isset($data['cuenta_destino_id'])) {
+                    Response::validationError('Ingreso/Gasto solo debe tener cuenta_id');
+                }
+            } elseif ($tipoMovId == 3) {
+                // TRASLADO
+                if (isset($data['cuenta_origen_id']) && empty($data['cuenta_origen_id'])) {
+                    Response::validationError('Cuenta origen es requerida para traslados');
+                }
+
+                if (isset($data['cuenta_destino_id']) && empty($data['cuenta_destino_id'])) {
+                    Response::validationError('Cuenta destino es requerida para traslados');
+                }
+
+                // Validar que cuenta origen y destino sean diferentes
+                if (isset($data['cuenta_origen_id']) && isset($data['cuenta_destino_id'])) {
+                    if ($data['cuenta_origen_id'] == $data['cuenta_destino_id']) {
+                        Response::validationError('Las cuentas de origen y destino deben ser diferentes');
                     }
+                }
+
+                // Si se envía cuenta_id, es error
+                if (isset($data['cuenta_id'])) {
+                    Response::validationError('Traslado no debe tener cuenta_id');
                 }
             }
         }
 
+        // Validar valor si se envía
         if (isset($data['valor']) && $data['valor'] <= 0) {
-            error_log("17. ERROR: Valor inválido");
-            $errors['valor'] = 'Valor debe ser mayor a 0';
+            error_log("16. ERROR: Valor inválido");
+            Response::validationError('Valor debe ser mayor a 0', [
+                'valor' => 'Valor debe ser mayor a 0'
+            ]);
         }
 
-        if (isset($data['fecha']) && empty($data['fecha'])) {
-            error_log("18. ERROR: Fecha vacía");
-            $errors['fecha'] = 'Fecha es requerida';
-        }
+        error_log("17. Validaciones OK, procediendo a actualizar");
 
-        if (!empty($errors)) {
-            error_log("19. Errores de validación: " . json_encode($errors));
-            Response::validationError('Errores de validación', $errors);
-        }
+        // Actualizar movimiento (incluyendo cuentas)
+        $movimientoActualizado = $this->movimientoModel->update(
+            $id,
+            $userId,
+            $data['concepto_id'] ?? null,
+            $data['valor'] ?? null,
+            $data['fecha'] ?? null,
+            $data['detalle'] ?? null,
+            $data['notas'] ?? null,
+            $data['circulos_ids'] ?? null,
+            $data['cuenta_id'] ?? null,
+            $data['cuenta_origen_id'] ?? null,
+            $data['cuenta_destino_id'] ?? null
+        );
 
-        error_log("20. Validaciones OK, llamando a modelo->update()...");
-
-        // Actualizar movimiento
-        try {
-            $movimientoActualizado = $this->movimientoModel->update(
-                $id,
-                $userId,
-                $data['concepto_id'] ?? null,
-                $data['valor'] ?? null,
-                $data['fecha'] ?? null,
-                $data['detalle'] ?? null,
-                $data['notas'] ?? null,
-                $data['circulos_ids'] ?? null
-            );
-
-            error_log("21. Modelo->update() ejecutado");
-        } catch (Exception $e) {
-            error_log("ERROR en modelo->update(): " . $e->getMessage());
-            error_log("Stack trace: " . $e->getTraceAsString());
-            Response::serverError('Error al actualizar: ' . $e->getMessage());
-        }
+        error_log("18. Llamada a modelo->update() ejecutada");
 
         if (!$movimientoActualizado) {
-            error_log("22. ERROR: modelo->update() retornó NULL o FALSE");
+            error_log("19. ERROR: modelo->update() retornó NULL o FALSE");
             Response::serverError('Error al actualizar el movimiento');
         }
 
-        error_log("23. Update exitoso, enviando respuesta...");
+        error_log("20. Update exitoso, enviando respuesta...");
         Response::success($movimientoActualizado, 'Movimiento actualizado exitosamente');
-        error_log("24. === FIN UPDATE ===");
+        error_log("21. === FIN UPDATE ===");
     }
 
     /**
@@ -553,7 +649,7 @@ class MovimientosController
     }
     /**
      * Obtener periodos disponibles (años y meses con registros)
-     * GET /movimientos/periodos/disponibles?circulo_id={id}&tipo_mov_id={1|2}
+     * GET /movimientos/periodos/disponibles?circulo_id={id}&tipo_mov_id={1|2|3}
      */
     public function getPeriodosDisponibles()
     {

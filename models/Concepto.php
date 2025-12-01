@@ -1,6 +1,6 @@
 <?php
 /**
- * Modelo Concepto
+ * Modelo Concepto - ACTUALIZADO CON tipo_mov_id
  * Gestión de categorías y conceptos por círculo
  */
 
@@ -19,7 +19,7 @@ class Concepto {
      * Obtener conceptos agrupados por categoría para un círculo y tipo de movimiento
      * 
      * @param int $circuloId ID del círculo
-     * @param int $tipoMovId ID del tipo de movimiento (1=Ingreso, 2=Gasto)
+     * @param int $tipoMovId ID del tipo de movimiento (1=Ingreso, 2=Gasto, 3=Traslado)
      * @return array Categorías con sus conceptos
      */
     public function getConceptosPorCirculo($circuloId, $tipoMovId) {
@@ -33,6 +33,7 @@ class Concepto {
                         c.id as concepto_id,
                         c.nombre as concepto_nombre,
                         c.icono as concepto_icono,
+                        c.tipo_mov_id as concepto_tipo_mov_id,
                         c.es_real as concepto_es_real,
                         c.requiere_detalle as concepto_requiere_detalle,
                         c.descripcion as concepto_descripcion
@@ -71,6 +72,7 @@ class Concepto {
                     'id' => $row['concepto_id'],
                     'nombre' => $row['concepto_nombre'],
                     'icono' => $row['concepto_icono'],
+                    'tipo_mov_id' => (int)$row['concepto_tipo_mov_id'],
                     'es_real' => (bool)$row['concepto_es_real'],
                     'requiere_detalle' => (bool)$row['concepto_requiere_detalle'],
                     'descripcion' => $row['concepto_descripcion']

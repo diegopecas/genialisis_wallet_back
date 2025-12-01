@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Modelo Movimiento
- * Gestión de movimientos financieros (ingresos y gastos)
+ * Modelo Movimiento - ACTUALIZADO CON SISTEMA DE CUENTAS
+ * Gestión de movimientos financieros con soporte para cuentas y traslados
  */
 
 require_once __DIR__ . '/Database.php';
@@ -20,6 +20,7 @@ class Movimiento
 
     /**
      * Crear nuevo movimiento
+     * ACTUALIZADO: Ahora incluye campos de cuentas
      * 
      * @param int $userId Usuario que registra
      * @param int $conceptoId Concepto seleccionado
@@ -28,18 +29,21 @@ class Movimiento
      * @param array $circulosIds IDs de círculos a asociar
      * @param string $detalle Detalle adicional (opcional)
      * @param string $notas Notas adicionales (opcional)
+     * @param int $cuentaId Cuenta para ingreso/gasto (opcional)
+     * @param int $cuentaOrigenId Cuenta origen para traslado (opcional)
+     * @param int $cuentaDestinoId Cuenta destino para traslado (opcional)
      * @return array|null Movimiento creado o null si falla
      */
-    public function create($userId, $conceptoId, $valor, $fecha, $circulosIds, $detalle = null, $notas = null)
+    public function create($userId, $conceptoId, $valor, $fecha, $circulosIds, $detalle = null, $notas = null, $cuentaId = null, $cuentaOrigenId = null, $cuentaDestinoId = null)
     {
         try {
             $this->conn->beginTransaction();
 
             // Insertar movimiento
             $query = "INSERT INTO movimientos 
-                      (user_id, concepto_id, valor, fecha, detalle, notas, creado_por_ia)
+                      (user_id, concepto_id, valor, fecha, detalle, notas, creado_por_ia, cuenta_id, cuenta_origen_id, cuenta_destino_id)
                       VALUES 
-                      (:user_id, :concepto_id, :valor, :fecha, :detalle, :notas, FALSE)";
+                      (:user_id, :concepto_id, :valor, :fecha, :detalle, :notas, FALSE, :cuenta_id, :cuenta_origen_id, :cuenta_destino_id)";
 
             $stmt = $this->conn->prepare($query);
             $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
@@ -48,6 +52,9 @@ class Movimiento
             $stmt->bindParam(':fecha', $fecha);
             $stmt->bindParam(':detalle', $detalle);
             $stmt->bindParam(':notas', $notas);
+            $stmt->bindParam(':cuenta_id', $cuentaId, PDO::PARAM_INT);
+            $stmt->bindParam(':cuenta_origen_id', $cuentaOrigenId, PDO::PARAM_INT);
+            $stmt->bindParam(':cuenta_destino_id', $cuentaDestinoId, PDO::PARAM_INT);
             $stmt->execute();
 
             $movimientoId = $this->conn->lastInsertId();
@@ -77,6 +84,7 @@ class Movimiento
 
     /**
      * Obtener movimiento por ID
+     * ACTUALIZADO: Incluye información de cuentas
      * 
      * @param int $movimientoId ID del movimiento
      * @return array|null Movimiento con información completa
@@ -104,6 +112,15 @@ class Movimiento
                         m.detalle,
                         m.notas,
                         m.creado_por_ia,
+                        m.cuenta_id,
+                        m.cuenta_origen_id,
+                        m.cuenta_destino_id,
+                        cuenta.nombre as cuenta_nombre,
+                        cuenta.icono as cuenta_icono,
+                        cuenta_origen.nombre as cuenta_origen_nombre,
+                        cuenta_origen.icono as cuenta_origen_icono,
+                        cuenta_destino.nombre as cuenta_destino_nombre,
+                        cuenta_destino.icono as cuenta_destino_icono,
                         m.created_at,
                         m.updated_at,
                         GROUP_CONCAT(circ.id ORDER BY circ.nombre) as circulos_ids,
@@ -116,6 +133,9 @@ class Movimiento
                       INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
                       LEFT JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
                       LEFT JOIN circulos circ ON mc.circulo_id = circ.id
+                      LEFT JOIN cuentas cuenta ON m.cuenta_id = cuenta.id
+                      LEFT JOIN cuentas cuenta_origen ON m.cuenta_origen_id = cuenta_origen.id
+                      LEFT JOIN cuentas cuenta_destino ON m.cuenta_destino_id = cuenta_destino.id
                       WHERE m.id = :movimiento_id
                       GROUP BY m.id
                       LIMIT 1";
@@ -139,8 +159,9 @@ class Movimiento
 
     /**
      * Obtener movimientos filtrados
+     * ACTUALIZADO: Incluye información de cuentas
      * 
-     * @param int $tipoMovId Tipo de movimiento (1=Ingreso, 2=Gasto, null=Todos)
+     * @param int $tipoMovId Tipo de movimiento (1=Ingreso, 2=Gasto, 3=Traslado, null=Todos)
      * @param int $circuloId ID del círculo (opcional)
      * @param int $anio Año (opcional)
      * @param int $mes Mes (opcional)
@@ -158,6 +179,9 @@ class Movimiento
             m.fecha,
             m.detalle,
             m.notas,
+            m.cuenta_id,
+            m.cuenta_origen_id,
+            m.cuenta_destino_id,
             m.created_at,
             c.nombre as concepto_nombre,
             c.icono as concepto_icono,
@@ -166,13 +190,22 @@ class Movimiento
             cat.icono as categoria_icono,
             cat.color as categoria_color,
             tm.nombre as tipo_movimiento,
-            u.nombre as usuario_nombre
+            u.nombre as usuario_nombre,
+            cuenta.nombre as cuenta_nombre,
+            cuenta.icono as cuenta_icono,
+            cuenta_origen.nombre as cuenta_origen_nombre,
+            cuenta_origen.icono as cuenta_origen_icono,
+            cuenta_destino.nombre as cuenta_destino_nombre,
+            cuenta_destino.icono as cuenta_destino_icono
           FROM movimientos m
           INNER JOIN conceptos c ON m.concepto_id = c.id
           INNER JOIN categorias cat ON c.categoria_id = cat.id
           INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
           INNER JOIN usuarios u ON m.user_id = u.id
           INNER JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
+          LEFT JOIN cuentas cuenta ON m.cuenta_id = cuenta.id
+          LEFT JOIN cuentas cuenta_origen ON m.cuenta_origen_id = cuenta_origen.id
+          LEFT JOIN cuentas cuenta_destino ON m.cuenta_destino_id = cuenta_destino.id
           WHERE 1=1";
 
             $params = [];
@@ -226,6 +259,7 @@ class Movimiento
     }
     /**
      * Obtener balance (totales) con filtros
+     * NOTA: Los traslados NO afectan el balance
      * 
      * @param int $userId ID del usuario
      * @param int $circuloId ID del círculo (opcional)
@@ -240,7 +274,7 @@ class Movimiento
             $query = "SELECT 
                     COALESCE(SUM(CASE WHEN tm.nombre = 'Ingreso' THEN m.valor ELSE 0 END), 0) as total_ingresos,
                     COALESCE(SUM(CASE WHEN tm.nombre = 'Gasto' THEN m.valor ELSE 0 END), 0) as total_gastos,
-                    COALESCE(SUM(CASE WHEN tm.nombre = 'Ingreso' THEN m.valor ELSE -m.valor END), 0) as balance_neto
+                    COALESCE(SUM(CASE WHEN tm.nombre = 'Ingreso' THEN m.valor WHEN tm.nombre = 'Gasto' THEN -m.valor ELSE 0 END), 0) as balance_neto
                   FROM movimientos m
                   INNER JOIN conceptos c ON m.concepto_id = c.id
                   INNER JOIN tipos_movimiento tm ON c.tipo_mov_id = tm.id
@@ -555,40 +589,38 @@ class Movimiento
         }
     }
     /**
-     * Actualizar movimiento
-     * NOTA: Los permisos se validan en el CONTROLLER (creador o admin)
-     * Este método solo ejecuta el update
+     * Actualizar movimiento existente
+     * ACTUALIZADO: Permite actualizar cuentas
      * 
      * @param int $movimientoId ID del movimiento a actualizar
-     * @param int $userId ID del usuario que hace la actualización (ya validado en controller)
+     * @param int $userId Usuario que actualiza (para validar permisos)
      * @param int $conceptoId Nuevo concepto (opcional)
      * @param float $valor Nuevo valor (opcional)
      * @param string $fecha Nueva fecha (opcional)
      * @param string $detalle Nuevo detalle (opcional)
      * @param string $notas Nuevas notas (opcional)
      * @param array $circulosIds Nuevos círculos (opcional)
+     * @param int $cuentaId Nueva cuenta (opcional)
+     * @param int $cuentaOrigenId Nueva cuenta origen (opcional)
+     * @param int $cuentaDestinoId Nueva cuenta destino (opcional)
      * @return array|null Movimiento actualizado o null si falla
      */
-    public function update($movimientoId, $userId, $conceptoId = null, $valor = null, $fecha = null, $detalle = null, $notas = null, $circulosIds = null)
+    public function update($movimientoId, $userId, $conceptoId = null, $valor = null, $fecha = null, $detalle = null, $notas = null, $circulosIds = null, $cuentaId = null, $cuentaOrigenId = null, $cuentaDestinoId = null)
     {
         try {
             $this->conn->beginTransaction();
 
-            // Solo verificar que el movimiento existe
-            // NO validar user_id porque el controller ya validó permisos (creador o admin)
+            // Verificar que el movimiento existe y pertenece al usuario
             $movimientoActual = $this->getById($movimientoId);
 
-            if (!$movimientoActual) {
-                error_log("Error en update: Movimiento no encontrado - ID: " . $movimientoId);
+            if (!$movimientoActual || $movimientoActual['user_id'] != $userId) {
                 $this->conn->rollBack();
                 return null;
             }
 
-            error_log("Update - Movimiento encontrado, procediendo con actualización");
-
             // Construir query dinámico según campos a actualizar
             $campos = [];
-            $params = [':movimiento_id' => $movimientoId];
+            $params = [':movimiento_id' => $movimientoId, ':user_id' => $userId];
 
             if ($conceptoId !== null) {
                 $campos[] = "concepto_id = :concepto_id";
@@ -615,16 +647,28 @@ class Movimiento
                 $params[':notas'] = $notas;
             }
 
+            // Actualizar cuentas
+            if ($cuentaId !== null) {
+                $campos[] = "cuenta_id = :cuenta_id";
+                $params[':cuenta_id'] = $cuentaId;
+            }
+
+            if ($cuentaOrigenId !== null) {
+                $campos[] = "cuenta_origen_id = :cuenta_origen_id";
+                $params[':cuenta_origen_id'] = $cuentaOrigenId;
+            }
+
+            if ($cuentaDestinoId !== null) {
+                $campos[] = "cuenta_destino_id = :cuenta_destino_id";
+                $params[':cuenta_destino_id'] = $cuentaDestinoId;
+            }
+
             // Solo actualizar si hay campos para actualizar
             if (!empty($campos)) {
-                // IMPORTANTE: NO validar user_id en el WHERE
-                // Los permisos ya fueron validados en el controller
                 $query = "UPDATE movimientos 
                           SET " . implode(", ", $campos) . "
-                          WHERE id = :movimiento_id";
-
-                error_log("Update query: " . $query);
-                error_log("Update params: " . json_encode($params));
+                          WHERE id = :movimiento_id 
+                            AND user_id = :user_id";
 
                 $stmt = $this->conn->prepare($query);
 
@@ -633,13 +677,10 @@ class Movimiento
                 }
 
                 $stmt->execute();
-                error_log("Update ejecutado, rows affected: " . $stmt->rowCount());
             }
 
             // Actualizar círculos si se proporcionaron
             if ($circulosIds !== null && is_array($circulosIds)) {
-                error_log("Actualizando círculos: " . json_encode($circulosIds));
-
                 // Eliminar círculos actuales
                 $deleteQuery = "DELETE FROM movimientos_circulos WHERE movimiento_id = :mov_id";
                 $deleteStmt = $this->conn->prepare($deleteQuery);
@@ -660,7 +701,6 @@ class Movimiento
             }
 
             $this->conn->commit();
-            error_log("Update commit exitoso");
 
             // Retornar movimiento actualizado
             return $this->getById($movimientoId);
@@ -771,7 +811,7 @@ class Movimiento
      * Obtener años y meses disponibles (con registros)
      * 
      * @param int $circuloId ID del círculo
-     * @param int $tipoMovId Tipo de movimiento (1=Ingreso, 2=Gasto, null=Todos)
+     * @param int $tipoMovId Tipo de movimiento (1=Ingreso, 2=Gasto, 3=Traslado, null=Todos)
      * @return array Años y meses disponibles
      */
     public function getPeriodosDisponibles($circuloId = null, $tipoMovId = null)
