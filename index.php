@@ -137,6 +137,15 @@ try {
             exit;
         }
 
+        // GET /movimientos/saldo/anterior
+        if (
+            $method === 'GET' && isset($uriParts[1]) && $uriParts[1] === 'saldo'
+            && isset($uriParts[2]) && $uriParts[2] === 'anterior'
+        ) {
+            $movimientosController->getSaldoAnterior();
+            exit;
+        }
+
         // GET /movimientos/{id}
         if ($method === 'GET' && isset($uriParts[1]) && is_numeric($uriParts[1])) {
             $movimientosController->getById($uriParts[1]);
@@ -152,6 +161,12 @@ try {
         // POST /movimientos
         if ($method === 'POST') {
             $movimientosController->create();
+            exit;
+        }
+
+        // PUT/PATCH /movimientos/{id}
+        if (($method === 'PUT' || $method === 'PATCH') && isset($uriParts[1]) && is_numeric($uriParts[1])) {
+            $movimientosController->update($uriParts[1]);
             exit;
         }
 

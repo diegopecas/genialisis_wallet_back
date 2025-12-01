@@ -199,7 +199,7 @@ class Movimiento
             }
 
             $query .= " ORDER BY m.fecha DESC, m.created_at DESC";
-            
+
             // Solo agregar LIMIT si se especifica
             if ($limit !== null) {
                 $query .= " LIMIT :limit";
@@ -555,6 +555,109 @@ class Movimiento
         }
     }
     /**
+     * Actualizar movimiento existente
+     * 
+     * @param int $movimientoId ID del movimiento a actualizar
+     * @param int $userId Usuario que actualiza (para validar permisos)
+     * @param int $conceptoId Nuevo concepto (opcional)
+     * @param float $valor Nuevo valor (opcional)
+     * @param string $fecha Nueva fecha (opcional)
+     * @param string $detalle Nuevo detalle (opcional)
+     * @param string $notas Nuevas notas (opcional)
+     * @param array $circulosIds Nuevos círculos (opcional)
+     * @return array|null Movimiento actualizado o null si falla
+     */
+    public function update($movimientoId, $userId, $conceptoId = null, $valor = null, $fecha = null, $detalle = null, $notas = null, $circulosIds = null)
+    {
+        try {
+            $this->conn->beginTransaction();
+
+            // Verificar que el movimiento existe y pertenece al usuario
+            $movimientoActual = $this->getById($movimientoId);
+
+            if (!$movimientoActual || $movimientoActual['user_id'] != $userId) {
+                $this->conn->rollBack();
+                return null;
+            }
+
+            // Construir query dinámico según campos a actualizar
+            $campos = [];
+            $params = [':movimiento_id' => $movimientoId, ':user_id' => $userId];
+
+            if ($conceptoId !== null) {
+                $campos[] = "concepto_id = :concepto_id";
+                $params[':concepto_id'] = $conceptoId;
+            }
+
+            if ($valor !== null) {
+                $campos[] = "valor = :valor";
+                $params[':valor'] = $valor;
+            }
+
+            if ($fecha !== null) {
+                $campos[] = "fecha = :fecha";
+                $params[':fecha'] = $fecha;
+            }
+
+            if ($detalle !== null) {
+                $campos[] = "detalle = :detalle";
+                $params[':detalle'] = $detalle;
+            }
+
+            if ($notas !== null) {
+                $campos[] = "notas = :notas";
+                $params[':notas'] = $notas;
+            }
+
+            // Solo actualizar si hay campos para actualizar
+            if (!empty($campos)) {
+                $query = "UPDATE movimientos 
+                          SET " . implode(", ", $campos) . "
+                          WHERE id = :movimiento_id 
+                            AND user_id = :user_id";
+
+                $stmt = $this->conn->prepare($query);
+
+                foreach ($params as $key => $value) {
+                    $stmt->bindValue($key, $value);
+                }
+
+                $stmt->execute();
+            }
+
+            // Actualizar círculos si se proporcionaron
+            if ($circulosIds !== null && is_array($circulosIds)) {
+                // Eliminar círculos actuales
+                $deleteQuery = "DELETE FROM movimientos_circulos WHERE movimiento_id = :mov_id";
+                $deleteStmt = $this->conn->prepare($deleteQuery);
+                $deleteStmt->bindParam(':mov_id', $movimientoId, PDO::PARAM_INT);
+                $deleteStmt->execute();
+
+                // Insertar nuevos círculos
+                if (!empty($circulosIds)) {
+                    $insertQuery = "INSERT INTO movimientos_circulos (movimiento_id, circulo_id) VALUES (:mov_id, :circ_id)";
+                    $insertStmt = $this->conn->prepare($insertQuery);
+
+                    foreach ($circulosIds as $circuloId) {
+                        $insertStmt->bindParam(':mov_id', $movimientoId, PDO::PARAM_INT);
+                        $insertStmt->bindParam(':circ_id', $circuloId, PDO::PARAM_INT);
+                        $insertStmt->execute();
+                    }
+                }
+            }
+
+            $this->conn->commit();
+
+            // Retornar movimiento actualizado
+            return $this->getById($movimientoId);
+        } catch (PDOException $e) {
+            $this->conn->rollBack();
+            error_log("Error en update: " . $e->getMessage());
+            return null;
+        }
+    }
+
+    /**
      * Eliminar movimiento
      * 
      * @param int $movimientoId ID del movimiento
@@ -593,17 +696,17 @@ class Movimiento
         return $movimiento;
     }
     /**
- * Obtener datos para gráfico de barras por categoría
- * 
- * @param int $circuloId ID del círculo (opcional)
- * @param int $anio Año (opcional)
- * @param int $mes Mes (opcional)
- * @return array Datos para gráfico
- */
-public function getGraficoCategoria($circuloId = null, $anio = null, $mes = null)
-{
-    try {
-        $query = "SELECT 
+     * Obtener datos para gráfico de barras por categoría
+     * 
+     * @param int $circuloId ID del círculo (opcional)
+     * @param int $anio Año (opcional)
+     * @param int $mes Mes (opcional)
+     * @return array Datos para gráfico
+     */
+    public function getGraficoCategoria($circuloId = null, $anio = null, $mes = null)
+    {
+        try {
+            $query = "SELECT 
                 cat.id as categoria_id,
                 cat.nombre as categoria_nombre,
                 cat.icono as categoria_icono,
@@ -617,33 +720,33 @@ public function getGraficoCategoria($circuloId = null, $anio = null, $mes = null
               LEFT JOIN movimientos_circulos mc ON m.id = mc.movimiento_id
               WHERE cat.circulo_id = :circulo_id";
 
-        $params = [':circulo_id' => $circuloId];
+            $params = [':circulo_id' => $circuloId];
 
-        if ($anio) {
-            $query .= " AND YEAR(m.fecha) = :anio";
-            $params[':anio'] = $anio;
-        }
+            if ($anio) {
+                $query .= " AND YEAR(m.fecha) = :anio";
+                $params[':anio'] = $anio;
+            }
 
-        if ($mes) {
-            $query .= " AND MONTH(m.fecha) = :mes";
-            $params[':mes'] = $mes;
-        }
+            if ($mes) {
+                $query .= " AND MONTH(m.fecha) = :mes";
+                $params[':mes'] = $mes;
+            }
 
-        $query .= " GROUP BY cat.id, cat.nombre, cat.icono, cat.color
+            $query .= " GROUP BY cat.id, cat.nombre, cat.icono, cat.color
                 ORDER BY cat.nombre ASC";
 
-        $stmt = $this->conn->prepare($query);
+            $stmt = $this->conn->prepare($query);
 
-        foreach ($params as $key => $value) {
-            $stmt->bindValue($key, $value);
+            foreach ($params as $key => $value) {
+                $stmt->bindValue($key, $value);
+            }
+
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
+            error_log("Error en getGraficoCategoria: " . $e->getMessage());
+            return [];
         }
-
-        $stmt->execute();
-
-        return $stmt->fetchAll();
-    } catch (PDOException $e) {
-        error_log("Error en getGraficoCategoria: " . $e->getMessage());
-        return [];
     }
-}   
 }

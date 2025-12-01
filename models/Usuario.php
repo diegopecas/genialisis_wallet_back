@@ -123,7 +123,6 @@ class Usuario {
         try {
             $query = "SELECT 
                         c.id,
-                        c.uuid,
                         c.nombre,
                         c.icono,
                         c.color,

@@ -157,6 +157,92 @@ class MovimientosController
     }
 
     /**
+     * Actualizar movimiento existente
+     * PUT/PATCH /movimientos/{id}
+     * Body: {
+     *   "concepto_id": 1, (opcional)
+     *   "valor": 50000, (opcional)
+     *   "fecha": "2025-11-01", (opcional)
+     *   "detalle": "...", (opcional)
+     *   "notas": "...", (opcional)
+     *   "circulos_ids": [1] (opcional)
+     * }
+     */
+    public function update($id)
+    {
+        $payload = $this->validateAuth();
+        $userId = $payload['user_id'];
+
+        // Verificar que el movimiento existe
+        $movimiento = $this->movimientoModel->getById($id);
+
+        if (!$movimiento) {
+            Response::notFound('Movimiento no encontrado');
+        }
+
+        // Validar que el movimiento pertenece al usuario
+        if ($movimiento['user_id'] != $userId) {
+            Response::unauthorized('No tienes permiso para actualizar este movimiento');
+        }
+
+        // Obtener datos del body
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        // Validaciones (solo para campos que vienen en el request)
+        $errors = [];
+
+        if (isset($data['concepto_id'])) {
+            if (empty($data['concepto_id'])) {
+                $errors['concepto_id'] = 'Concepto es requerido';
+            } else {
+                // Validar que el concepto existe
+                $concepto = $this->conceptoModel->getById($data['concepto_id']);
+                if (!$concepto) {
+                    $errors['concepto_id'] = 'Concepto no encontrado';
+                }
+
+                // Validar detalle si el concepto lo requiere
+                if ($concepto && $concepto['requiere_detalle']) {
+                    $detalleActualizado = $data['detalle'] ?? $movimiento['detalle'];
+                    if (empty($detalleActualizado)) {
+                        $errors['detalle'] = 'Este concepto requiere detalle';
+                    }
+                }
+            }
+        }
+
+        if (isset($data['valor']) && $data['valor'] <= 0) {
+            $errors['valor'] = 'Valor debe ser mayor a 0';
+        }
+
+        if (isset($data['fecha']) && empty($data['fecha'])) {
+            $errors['fecha'] = 'Fecha es requerida';
+        }
+
+        if (!empty($errors)) {
+            Response::validationError('Errores de validación', $errors);
+        }
+
+        // Actualizar movimiento
+        $movimientoActualizado = $this->movimientoModel->update(
+            $id,
+            $userId,
+            $data['concepto_id'] ?? null,
+            $data['valor'] ?? null,
+            $data['fecha'] ?? null,
+            $data['detalle'] ?? null,
+            $data['notas'] ?? null,
+            $data['circulos_ids'] ?? null
+        );
+
+        if (!$movimientoActualizado) {
+            Response::serverError('Error al actualizar el movimiento');
+        }
+
+        Response::success($movimientoActualizado, 'Movimiento actualizado exitosamente');
+    }
+
+    /**
      * Eliminar movimiento
      * DELETE /movimientos/{id}
      */

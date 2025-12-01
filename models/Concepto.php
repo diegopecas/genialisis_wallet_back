@@ -95,9 +95,7 @@ class Concepto {
         try {
             $query = "SELECT 
                         c.id,
-                        c.uuid,
                         c.categoria_id,
-                        c.categoria_uuid,
                         c.tipo_mov_id,
                         c.nombre,
                         c.icono,
@@ -141,7 +139,6 @@ class Concepto {
         try {
             $query = "SELECT 
                         c.id,
-                        c.uuid,
                         c.nombre,
                         c.icono,
                         c.tipo_mov_id,
