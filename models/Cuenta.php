@@ -114,19 +114,18 @@ class Cuenta
                           SUM(
                             CASE
                               -- INGRESOS: suma positiva
-                              WHEN c.tipo_mov_id = 1 AND m.cuenta_id = :cuenta_id THEN m.valor
+                              WHEN m.tipo_mov_id = 1 AND m.cuenta_id = :cuenta_id THEN m.valor
                               -- GASTOS: resta
-                              WHEN c.tipo_mov_id = 2 AND m.cuenta_id = :cuenta_id THEN -m.valor
+                              WHEN m.tipo_mov_id = 2 AND m.cuenta_id = :cuenta_id THEN -m.valor
                               -- TRASLADOS: cuenta destino suma
-                              WHEN c.tipo_mov_id = 3 AND m.cuenta_destino_id = :cuenta_id THEN m.valor
+                              WHEN m.tipo_mov_id = 3 AND m.cuenta_destino_id = :cuenta_id THEN m.valor
                               -- TRASLADOS: cuenta origen resta
-                              WHEN c.tipo_mov_id = 3 AND m.cuenta_origen_id = :cuenta_id THEN -m.valor
+                              WHEN m.tipo_mov_id = 3 AND m.cuenta_origen_id = :cuenta_id THEN -m.valor
                               ELSE 0
                             END
                           ), 0
                         ) as saldo
                       FROM movimientos m
-                      INNER JOIN conceptos c ON m.concepto_id = c.id
                       WHERE (
                         m.cuenta_id = :cuenta_id
                         OR m.cuenta_origen_id = :cuenta_id
