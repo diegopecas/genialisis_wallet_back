@@ -300,70 +300,70 @@ class MovimientosController
      */
     public function update($id)
     {
-        error_log("=== INICIO UPDATE ===");
+
 
         $payload = $this->validateAuth();
         $userId = $payload['user_id'];
-        error_log("1. Auth OK - userId: " . $userId);
+
 
         // Verificar que el movimiento existe
         $movimiento = $this->movimientoModel->getById($id);
-        error_log("2. Movimiento obtenido");
+
 
         if (!$movimiento) {
             error_log("ERROR: Movimiento no encontrado");
             Response::notFound('Movimiento no encontrado');
         }
 
-        error_log("3. Movimiento existe - user_id: " . $movimiento['user_id']);
+
 
         // VALIDACIÓN DE PERMISOS
         $esCreador = ($movimiento['user_id'] == $userId);
-        error_log("4. ¿Es creador? " . ($esCreador ? 'SI' : 'NO'));
+
 
         if ($esCreador) {
-            error_log("5. ✅ Permiso concedido: Es el creador");
+
         } else {
             // Verificar si es admin de algún círculo del movimiento
             $circulosMovimiento = explode(',', $movimiento['circulos_ids']);
-            error_log("6. Verificando admin en círculos: " . implode(', ', $circulosMovimiento));
+
 
             $esAdminDeAlgunCirculo = $this->movimientoModel->esAdminDeCirculos($userId, $circulosMovimiento);
-            error_log("7. ¿Es admin de algún círculo? " . ($esAdminDeAlgunCirculo ? 'SI' : 'NO'));
+
 
             if (!$esAdminDeAlgunCirculo) {
-                error_log("8. ❌ PERMISO DENEGADO: No es creador ni admin");
+
                 Response::unauthorized('No tienes permiso para editar este movimiento');
             }
 
-            error_log("9. ✅ Permiso concedido: Es admin del círculo");
+
         }
 
         // Obtener datos del body
         $data = json_decode(file_get_contents('php://input'), true);
-        error_log("10. Datos recibidos: " . json_encode($data));
+
 
         // Validar concepto si se envía
         if (isset($data['concepto_id'])) {
-            error_log("11. Validando concepto_id: " . $data['concepto_id']);
+
             $concepto = $this->conceptoModel->getById($data['concepto_id']);
 
             if (!$concepto) {
-                error_log("12. ERROR: Concepto no encontrado");
+
                 Response::validationError('Concepto no encontrado');
             }
 
-            error_log("13. Concepto válido");
+
 
             // Validar detalle si el concepto lo requiere
             if ($concepto['requiere_detalle']) {
                 if (isset($data['detalle']) && empty($data['detalle'])) {
-                    error_log("14. ERROR: Detalle requerido pero vacío");
+
                     Response::validationError('Este concepto requiere detalle', [
                         'detalle' => 'Detalle es requerido para este concepto'
                     ]);
                 }
-                error_log("15. Detalle OK");
+
             }
 
             // === VALIDACIONES DE CUENTAS SI SE CAMBIA EL CONCEPTO ===
@@ -405,13 +405,12 @@ class MovimientosController
 
         // Validar valor si se envía
         if (isset($data['valor']) && $data['valor'] <= 0) {
-            error_log("16. ERROR: Valor inválido");
+
             Response::validationError('Valor debe ser mayor a 0', [
                 'valor' => 'Valor debe ser mayor a 0'
             ]);
         }
 
-        error_log("17. Validaciones OK, procediendo a actualizar");
 
         // Actualizar movimiento (incluyendo cuentas)
         $movimientoActualizado = $this->movimientoModel->update(
@@ -428,16 +427,16 @@ class MovimientosController
             $data['cuenta_destino_id'] ?? null
         );
 
-        error_log("18. Llamada a modelo->update() ejecutada");
+
 
         if (!$movimientoActualizado) {
-            error_log("19. ERROR: modelo->update() retornó NULL o FALSE");
+
             Response::serverError('Error al actualizar el movimiento');
         }
 
-        error_log("20. Update exitoso, enviando respuesta...");
+
         Response::success($movimientoActualizado, 'Movimiento actualizado exitosamente');
-        error_log("21. === FIN UPDATE ===");
+
     }
 
     /**
@@ -453,10 +452,7 @@ class MovimientosController
         $payload = $this->validateAuth();
         $userId = $payload['user_id'];
 
-        // LOG DE DEBUG
-        error_log("=== DELETE MOVIMIENTO DEBUG ===");
-        error_log("Movimiento ID: " . $id);
-        error_log("User ID del token: " . $userId);
+
 
         // Verificar que el movimiento existe
         $movimiento = $this->movimientoModel->getById($id);
@@ -466,28 +462,28 @@ class MovimientosController
             Response::notFound('Movimiento no encontrado');
         }
 
-        error_log("Movimiento encontrado - creado por user_id: " . $movimiento['user_id']);
+
 
         // VALIDACIÓN DE PERMISOS MEJORADA
         $esCreador = ($movimiento['user_id'] == $userId);
-        error_log("¿Es creador del movimiento? " . ($esCreador ? 'SI' : 'NO'));
+
 
         if ($esCreador) {
-            error_log("✅ Permiso concedido: Es el creador");
+
         } else {
             // Verificar si es admin de algún círculo del movimiento
             $circulosMovimiento = explode(',', $movimiento['circulos_ids']);
-            error_log("Círculos del movimiento: " . implode(', ', $circulosMovimiento));
+
 
             $esAdminDeAlgunCirculo = $this->movimientoModel->esAdminDeCirculos($userId, $circulosMovimiento);
-            error_log("¿Es admin de algún círculo? " . ($esAdminDeAlgunCirculo ? 'SI' : 'NO'));
+
 
             if (!$esAdminDeAlgunCirculo) {
-                error_log("❌ PERMISO DENEGADO: No es creador ni admin del círculo");
+
                 Response::unauthorized('No tienes permiso para eliminar este movimiento');
             }
 
-            error_log("✅ Permiso concedido: Es admin del círculo");
+
         }
 
         // Eliminar
@@ -498,7 +494,7 @@ class MovimientosController
             Response::serverError('Error al eliminar el movimiento');
         }
 
-        error_log("✅ Movimiento eliminado exitosamente");
+
         Response::success(null, 'Movimiento eliminado exitosamente');
     }
 
@@ -665,5 +661,54 @@ class MovimientosController
         Response::success([
             'periodos' => $periodos
         ], 'Periodos disponibles obtenidos correctamente');
+    }
+
+    /**
+     * Obtener saldo anterior (acumulado hasta el período anterior)
+     * GET /movimientos/saldo/anterior?circulo_id=1&anio=2025&mes=12
+     * 
+     * Calcula el saldo TOTAL de todas las cuentas considerando
+     * TODOS los movimientos anteriores al período seleccionado.
+     * 
+     * IMPORTANTE: Los traslados NO afectan el saldo total
+     * (solo mueven dinero entre cuentas del mismo círculo)
+     * 
+     * Fórmula: Ingresos (tipo 1) - Gastos (tipo 2)
+     */
+    public function getSaldoAnterior()
+    {
+        // Validar autenticación
+        $payload = $this->validateAuth();
+        $userId = $payload['user_id'];
+
+        // Obtener parámetros
+        $circuloId = isset($_GET['circulo_id']) ? intval($_GET['circulo_id']) : 0;
+        $anio = isset($_GET['anio']) ? intval($_GET['anio']) : 0;
+        $mes = isset($_GET['mes']) ? intval($_GET['mes']) : 0;
+
+        // Validaciones
+        if ($circuloId === 0) {
+            Response::validationError('circulo_id es requerido');
+        }
+
+        if ($anio === 0 || $mes === 0) {
+            Response::validationError('anio y mes son requeridos');
+        }
+
+        if ($mes < 1 || $mes > 12) {
+            Response::validationError('mes debe estar entre 1 y 12');
+        }
+
+        // Llamar al modelo
+        $resultado = $this->movimientoModel->getSaldoAnterior($circuloId, $anio, $mes);
+
+        Response::success([
+            'saldo_anterior' => $resultado['saldo_anterior'],
+            'total_ingresos' => $resultado['total_ingresos'],
+            'total_gastos' => $resultado['total_gastos'],
+            'total_movimientos' => $resultado['total_movimientos'],
+            'periodo_desde' => 'inicio',
+            'periodo_hasta' => $resultado['periodo_hasta']
+        ], 'Saldo anterior calculado correctamente');
     }
 }

@@ -706,8 +706,7 @@ class Movimiento
             return $this->getById($movimientoId);
         } catch (PDOException $e) {
             $this->conn->rollBack();
-            error_log("Error en update: " . $e->getMessage());
-            error_log("Stack trace: " . $e->getTraceAsString());
+
             return null;
         }
     }
@@ -732,7 +731,7 @@ class Movimiento
             $stmt->execute();
 
             $rowsDeleted = $stmt->rowCount();
-            error_log("Delete ejecutado - Rows deleted: " . $rowsDeleted);
+
 
             return $rowsDeleted > 0;
         } catch (PDOException $e) {
@@ -921,6 +920,91 @@ class Movimiento
         } catch (PDOException $e) {
             error_log("Error en esAdminDeCirculos: " . $e->getMessage());
             return false;
+        }
+    }
+
+    /**
+     * Obtener saldo anterior (acumulado hasta el período anterior)
+     * 
+     * Calcula el saldo TOTAL de todas las cuentas considerando
+     * TODOS los movimientos anteriores al período seleccionado.
+     * 
+     * IMPORTANTE: Los traslados NO afectan el saldo total
+     * 
+     * @param int $circuloId ID del círculo
+     * @param int $anio Año del período actual
+     * @param int $mes Mes del período actual
+     * @return array ['saldo_anterior', 'total_ingresos', 'total_gastos', 'total_movimientos']
+     */
+    public function getSaldoAnterior($circuloId, $anio, $mes)
+    {
+        try {
+            // Calcular fecha límite (primer día del período seleccionado)
+            $fechaLimite = sprintf('%04d-%02d-01', $anio, $mes);
+
+
+
+            // Query para calcular saldo anterior
+            $query = "SELECT 
+                        COALESCE(SUM(
+                            CASE
+                                WHEN co.tipo_mov_id = 1 THEN m.valor
+                                ELSE 0
+                            END
+                        ), 0) as total_ingresos,
+                        COALESCE(SUM(
+                            CASE
+                                WHEN co.tipo_mov_id = 2 THEN m.valor
+                                ELSE 0
+                            END
+                        ), 0) as total_gastos,
+                        COUNT(*) as total_movimientos
+                      FROM movimientos m
+                      INNER JOIN conceptos co ON m.concepto_id = co.id
+                      INNER JOIN cuentas c ON (
+                        m.cuenta_id = c.id 
+                        OR m.cuenta_origen_id = c.id 
+                        OR m.cuenta_destino_id = c.id
+                      )
+                      WHERE c.circulo_id = :circulo_id
+                        AND m.fecha < :fecha_limite";
+
+            // DEBUG: Imprimir query con valores
+            $debugQuery = str_replace([':circulo_id', ':fecha_limite'], [$circuloId, "'$fechaLimite'"], $query);
+
+
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':circulo_id', $circuloId, PDO::PARAM_INT);
+            $stmt->bindParam(':fecha_limite', $fechaLimite, PDO::PARAM_STR);
+            $stmt->execute();
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+
+            // Calcular saldo: Ingresos - Gastos
+            $totalIngresos = floatval($result['total_ingresos']);
+            $totalGastos = floatval($result['total_gastos']);
+            $saldoAnterior = $totalIngresos - $totalGastos;
+
+
+            return [
+                'saldo_anterior' => $saldoAnterior,
+                'total_ingresos' => $totalIngresos,
+                'total_gastos' => $totalGastos,
+                'total_movimientos' => intval($result['total_movimientos']),
+                'periodo_hasta' => date('Y-m-d', strtotime($fechaLimite . ' -1 day'))
+            ];
+
+        } catch (PDOException $e) {
+            error_log("Error en Movimiento::getSaldoAnterior: " . $e->getMessage());
+            return [
+                'saldo_anterior' => 0,
+                'total_ingresos' => 0,
+                'total_gastos' => 0,
+                'total_movimientos' => 0,
+                'periodo_hasta' => ''
+            ];
         }
     }
 }

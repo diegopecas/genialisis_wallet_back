@@ -51,8 +51,7 @@ function generateJWT($payload) {
  * @return array|null Payload decodificado o null si es inválido
  */
 function validateJWT($token) {
-    // LOG DE DEBUG
-    error_log("validateJWT - Token recibido: " . ($token ? "SI" : "NO"));
+
     
     if (!$token) {
         error_log("validateJWT - ERROR: Token vacío");
@@ -86,7 +85,7 @@ function validateJWT($token) {
         return null;
     }
     
-    error_log("validateJWT - ✅ Token válido - user_id: " . ($payload['user_id'] ?? 'N/A'));
+
     
     return $payload;
 }
@@ -156,11 +155,8 @@ function getAuthorizationHeader() {
         }
     }
     
-    // LOG DE DEBUG (comentar en producción)
-    error_log("getAuthorizationHeader - Header encontrado: " . ($headers ? "SI" : "NO"));
-    if ($headers) {
-        error_log("getAuthorizationHeader - Valor: " . substr($headers, 0, 30) . "...");
-    }
+
+
     
     return $headers;
 }

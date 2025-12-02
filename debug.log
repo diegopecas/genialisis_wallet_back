@@ -86,3 +86,25 @@ User ID: 1, Email en BD: mariarestrepo77@gmail.com
 ---
 Password verify: TRUE
 =============================
+2025-12-02 04:51:39 - CONEXIÓN INFO
+Base de datos activa: genialisis-wallet-prod
+---
+2025-12-02 04:51:40 - authenticate() called
+Email buscado: mariarestrepo77@gmail.com
+Rows retornadas: 1
+User found: YES
+User ID: 1, Email en BD: mariarestrepo77@gmail.com
+---
+Password verify: TRUE
+=============================
+2025-12-02 04:57:53 - CONEXIÓN INFO
+Base de datos activa: genialisis-wallet-prod
+---
+2025-12-02 04:57:53 - authenticate() called
+Email buscado: mariarestrepo77@gmail.com
+Rows retornadas: 1
+User found: YES
+User ID: 1, Email en BD: mariarestrepo77@gmail.com
+---
+Password verify: TRUE
+=============================
