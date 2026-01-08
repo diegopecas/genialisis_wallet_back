@@ -290,3 +290,6 @@ Para preguntas o problemas:
 ---
 
 **¡Backend listo para usar! 🎉**
+
+## Start Server
+C:/xampp/php/php -S localhost:8888
