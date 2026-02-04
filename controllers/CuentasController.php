@@ -217,6 +217,42 @@ class CuentasController
     }
 
     /**
+     * Obtener saldos anteriores por cuenta para un período
+     * GET /cuentas/saldos/anteriores?circulo_id={id}&anio={2025}&mes={12}
+     * 
+     * Retorna el saldo acumulado de cada cuenta HASTA ANTES del período seleccionado.
+     */
+    public function getSaldosAnteriores()
+    {
+        $payload = $this->validateAuth();
+        $userId = $payload['user_id'];
+
+        $circuloId = isset($_GET['circulo_id']) ? intval($_GET['circulo_id']) : null;
+        $anio = isset($_GET['anio']) ? intval($_GET['anio']) : null;
+        $mes = isset($_GET['mes']) ? intval($_GET['mes']) : null;
+
+        if (!$circuloId) {
+            Response::validationError('circulo_id es requerido');
+        }
+
+        if (!$anio || !$mes) {
+            Response::validationError('anio y mes son requeridos');
+        }
+
+        if ($mes < 1 || $mes > 12) {
+            Response::validationError('mes debe estar entre 1 y 12');
+        }
+
+        $saldos = $this->cuentaModel->getSaldosAnterioresPorCirculo($circuloId, $anio, $mes);
+
+        Response::success([
+            'saldos' => $saldos,
+            'periodo_hasta' => date('Y-m-d', strtotime(sprintf('%04d-%02d-01', $anio, $mes) . ' -1 day')),
+            'total_cuentas' => count($saldos)
+        ], 'Saldos anteriores por cuenta obtenidos correctamente');
+    }
+
+    /**
      * Validar autenticación
      */
     private function validateAuth()

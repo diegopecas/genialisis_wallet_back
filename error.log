@@ -176,3 +176,99 @@
 [08-Jan-2026 23:30:53 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
 [08-Jan-2026 23:30:53 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
 [08-Jan-2026 23:30:53 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[26-Jan-2026 15:35:08 Europe/Berlin] validateJWT - ERROR: Token expirado
+[26-Jan-2026 15:35:09 Europe/Berlin] validateJWT - ERROR: Token expirado
+[26-Jan-2026 15:35:10 Europe/Berlin] validateJWT - ERROR: Token expirado
+[26-Jan-2026 15:35:11 Europe/Berlin] validateJWT - ERROR: Token expirado
+[26-Jan-2026 15:35:11 Europe/Berlin] validateJWT - ERROR: Token expirado
+[26-Jan-2026 15:35:12 Europe/Berlin] validateJWT - ERROR: Token expirado
+[26-Jan-2026 15:35:13 Europe/Berlin] validateJWT - ERROR: Token expirado
+[26-Jan-2026 15:35:14 Europe/Berlin] validateJWT - ERROR: Token expirado
+[26-Jan-2026 15:46:12 Europe/Berlin] validateJWT - ERROR: Token expirado
+[26-Jan-2026 15:46:13 Europe/Berlin] validateJWT - ERROR: Token expirado
+[26-Jan-2026 15:46:14 Europe/Berlin] validateJWT - ERROR: Token expirado
+[26-Jan-2026 15:46:18 Europe/Berlin] validateJWT - ERROR: Token expirado
+[26-Jan-2026 15:46:19 Europe/Berlin] validateJWT - ERROR: Token expirado
+[26-Jan-2026 15:46:57 Europe/Berlin] validateJWT - ERROR: Token expirado
+[26-Jan-2026 15:46:58 Europe/Berlin] validateJWT - ERROR: Token expirado
+[26-Jan-2026 15:47:13 Europe/Berlin] validateJWT - ERROR: Token expirado
+[26-Jan-2026 15:47:14 Europe/Berlin] validateJWT - ERROR: Token expirado
+[26-Jan-2026 15:47:15 Europe/Berlin] validateJWT - ERROR: Token expirado
+[26-Jan-2026 15:47:41 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[26-Jan-2026 15:47:41 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[26-Jan-2026 15:47:41 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[26-Jan-2026 15:47:41 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[26-Jan-2026 15:47:41 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[26-Jan-2026 15:47:42 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[26-Jan-2026 17:20:46 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[26-Jan-2026 17:20:46 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[26-Jan-2026 17:20:46 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[26-Jan-2026 17:20:47 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[26-Jan-2026 17:20:47 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[26-Jan-2026 17:20:47 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[28-Jan-2026 04:10:39 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[28-Jan-2026 04:10:39 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[28-Jan-2026 04:10:39 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[28-Jan-2026 04:10:40 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[28-Jan-2026 04:10:40 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[28-Jan-2026 04:10:40 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[28-Jan-2026 15:37:12 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[28-Jan-2026 15:37:13 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[28-Jan-2026 15:37:13 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[28-Jan-2026 15:37:13 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[28-Jan-2026 15:37:13 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[28-Jan-2026 15:37:13 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[29-Jan-2026 15:28:18 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[29-Jan-2026 15:28:18 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[29-Jan-2026 15:28:18 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[29-Jan-2026 15:28:18 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[29-Jan-2026 15:28:18 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[29-Jan-2026 15:28:19 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 02:09:51 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 02:09:51 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 02:09:51 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 02:09:52 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 02:09:52 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 02:09:52 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 03:45:39 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 03:45:39 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 03:45:39 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 03:45:39 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 03:45:40 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 03:45:40 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 03:56:19 Europe/Berlin] Error en getSaldoAnteriorCuenta: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 03:56:19 Europe/Berlin] Error en getSaldoAnteriorCuenta: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 03:56:20 Europe/Berlin] Error en getSaldoAnteriorCuenta: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 03:56:20 Europe/Berlin] Error en getSaldoAnteriorCuenta: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 03:56:20 Europe/Berlin] Error en getSaldoAnteriorCuenta: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 03:56:20 Europe/Berlin] Error en getSaldoAnteriorCuenta: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 04:14:50 Europe/Berlin] Error en getSaldoAnteriorCuenta: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 04:14:50 Europe/Berlin] Error en getSaldoAnteriorCuenta: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 04:14:50 Europe/Berlin] Error en getSaldoAnteriorCuenta: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 04:14:51 Europe/Berlin] Error en getSaldoAnteriorCuenta: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 04:14:51 Europe/Berlin] Error en getSaldoAnteriorCuenta: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 04:14:51 Europe/Berlin] Error en getSaldoAnteriorCuenta: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 04:16:37 Europe/Berlin] Error en getSaldoAnteriorCuenta: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 04:16:37 Europe/Berlin] Error en getSaldoAnteriorCuenta: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 04:16:38 Europe/Berlin] Error en getSaldoAnteriorCuenta: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 04:16:38 Europe/Berlin] Error en getSaldoAnteriorCuenta: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 04:16:38 Europe/Berlin] Error en getSaldoAnteriorCuenta: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 04:16:38 Europe/Berlin] Error en getSaldoAnteriorCuenta: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 04:26:03 Europe/Berlin] getSaldoAnteriorCuenta: cuenta_id=1, fecha_limite=2026-02-01, saldo=2503714.00
+[04-Feb-2026 04:26:04 Europe/Berlin] getSaldoAnteriorCuenta: cuenta_id=2, fecha_limite=2026-02-01, saldo=-7806680.00
+[04-Feb-2026 04:26:04 Europe/Berlin] getSaldoAnteriorCuenta: cuenta_id=3, fecha_limite=2026-02-01, saldo=34561621.00
+[04-Feb-2026 04:26:05 Europe/Berlin] getSaldoAnteriorCuenta: cuenta_id=4, fecha_limite=2026-02-01, saldo=662198.00
+[04-Feb-2026 04:26:06 Europe/Berlin] getSaldoAnteriorCuenta: cuenta_id=5, fecha_limite=2026-02-01, saldo=1155000.00
+[04-Feb-2026 04:26:06 Europe/Berlin] getSaldoAnteriorCuenta: cuenta_id=6, fecha_limite=2026-02-01, saldo=78108.00
+[04-Feb-2026 04:31:12 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 04:31:12 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 04:31:12 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 04:31:13 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 04:31:13 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 04:31:13 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 04:31:21 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 04:31:21 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 04:31:22 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 04:31:22 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 04:31:22 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'
+[04-Feb-2026 04:31:22 Europe/Berlin] Error en getSaldoActual: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.tipo_mov_id' in 'SELECT'

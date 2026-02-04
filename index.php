@@ -98,6 +98,15 @@ try {
             exit;
         }
 
+        // GET /cuentas/saldos/anteriores
+        if (
+            $method === 'GET' && isset($uriParts[1]) && $uriParts[1] === 'saldos'
+            && isset($uriParts[2]) && $uriParts[2] === 'anteriores'
+        ) {
+            $cuentasController->getSaldosAnteriores();
+            exit;
+        }
+
         // GET /cuentas/{id}/saldo
         if (
             $method === 'GET' && isset($uriParts[1]) && is_numeric($uriParts[1])
